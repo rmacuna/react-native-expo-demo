@@ -4,14 +4,28 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import LogIn from './screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
 import * as Font from 'expo-font';
-const AppNavigator = createStackNavigator({
-  root: LogIn,
-  Register: RegisterScreen
-});
 
+
+
+const RouteConfig = {
+  LoginScreen: {
+    screen: LogIn,
+    navigationOptions: () => ({
+      header: null
+    }),
+  },
+  Register: RegisterScreen
+}
+
+const StackNavigatorConfig = {
+  initialRouteName: 'LoginScreen',
+}
+
+const AppNavigator = createStackNavigator(RouteConfig, StackNavigatorConfig);
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends Component {
+
   state = {
     fontLoaded: false
   }
@@ -30,6 +44,10 @@ export default class App extends Component {
 
 
   render() {
-    return <AppContainer/>
+    return (
+      this.state.fontLoaded ? (
+        <AppContainer />
+      ) : null
+    )
   }
 }
