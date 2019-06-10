@@ -15,12 +15,16 @@ class LoginScreen extends Component {
             username: {
                 valid: false,
                 value: "",
-                validationRules: {}
+                validationRules: {
+                    isEmail: false
+                }
             },
             password: {
                 valid: false,
                 value: "",
-                validationRules: {}
+                validationRules: {
+                    minLength: 6
+                }
             }
         }
     }
@@ -61,12 +65,15 @@ class LoginScreen extends Component {
 
                     <View style={styles.bottomFotterWrapper}>
                         <View style={styles.item}>
-                            <TouchableOpacity>
-                                <Text style={[styles.footerAction, {padding: 20}]}>Crear una cuenta</Text>
+                            <TouchableOpacity
+                                onPress={
+                                    () => this.props.navigation.navigate('Register')
+                                }>
+                                <Text style={[styles.footerAction, { padding: 20 }]}>Crear una cuenta</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.lineSeparador}></View>
-                        <View style={[styles.item, Platform.OS === 'android' ? {marginLeft: 20}: null]}>
+                        <View style={[styles.item, Platform.OS === 'android' ? { marginLeft: 20 } : null]}>
                             <TouchableOpacity>
                                 <Text style={styles.footerAction}>Olvide la contraseña</Text>
                             </TouchableOpacity>

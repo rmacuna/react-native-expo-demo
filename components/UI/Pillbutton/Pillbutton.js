@@ -28,9 +28,6 @@ const Pillbutton = (props) => {
                 {content}
             </TouchableNativeFeedback>
         )
-
-
-
     }
     return (
         <TouchableOpacity 
