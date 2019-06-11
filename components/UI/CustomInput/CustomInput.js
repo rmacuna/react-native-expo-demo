@@ -6,16 +6,20 @@ const CustomInput = (props) => {
     return (
 
         <View style={[styles.container, { marginBottom : props.separation} ]}>
-            <Text style={ Platform.OS === "ios" ? styles.label_IOS : styles.label_ANDROID }>{props.label}</Text>
+            <Text style={ 
+                [Platform.OS === "ios" ? styles.label_IOS : styles.label_ANDROID, props.labelColor] }
+                >
+                {props.label}
+            </Text>
             <TextInput
                 {...props}
                 style={
                     Platform.OS === "ios" ? 
-                    [styles.input_IOS, props.style] : 
-                    [styles.input_ANDROID, props.style] 
+                    [styles.input_IOS, props.style, props.textColor] : 
+                    [styles.input_ANDROID, props.style, props.textColor] 
                 }>
             </TextInput>
-            <View style={styles.lineInput}></View>
+            <View  style={[styles.lineInput, props.lineColor]}></View>
         </View>
 
     )
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
         width: '100%',
         zIndex: 1,
         paddingBottom: 6,
+
         fontFamily: 'GorditaMedium'
     },
     input_ANDROID: {

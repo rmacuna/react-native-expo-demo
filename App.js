@@ -7,23 +7,24 @@ import HomeScreen from './screens/Tabs/Home/Homescreen';
 import SearchScreen from './screens/Tabs/Search/Searchscreen';
 import CategoryScreen from './screens/Tabs/Categories/CateScreen';
 
-// Import del Auth stack
-
+// Import del Auth stack.
 import LogInScreen from './screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
 import AuthLoadingScreen from './screens/Auth/AuthLoading';
 
+import * as constants from './constants/constants';
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
  Luego se debe crear el stack de navegacion de tabs y el switch navigator para ir
  a la página principal. 
 */
-
 const AppStack = createBottomTabNavigator({
-  Home: HomeScreen,
   Search: SearchScreen,
+  Home: HomeScreen,
   Categories: CategoryScreen
-});
+}, {
+    initialRouteName: 'Home'
+  });
 
 const AuthStack = createStackNavigator({
   Signin: {
@@ -32,20 +33,32 @@ const AuthStack = createStackNavigator({
       header: null
     })
   },
-  Register: RegisterScreen
-})
+  Register: {
+    screen: RegisterScreen,
+    navigationOptions: () => ({
+      headerStyle: {
+        ...constants.HEADER_REGISTER_STYLE.HeaderBar
+      },
+      headerTintColor: constants.COLOR_PRIMARY,
+      headerTitleStyle: {
+        ...constants.HEADER_REGISTER_STYLE.HeaderTitle
+      }
+    })
+  }
+});
 
 const RouteConfig = {
   AuthLoading: AuthLoadingScreen,
   App: AppStack,
   Auth: AuthStack
-}
+};
+
 
 const StackNavigatorConfig = {
   initialRouteName: 'AuthLoading',
 }
 
-const AppNavigator = createSwitchNavigator(RouteConfig, StackNavigatorConfig) 
+const AppNavigator = createSwitchNavigator(RouteConfig, StackNavigatorConfig)
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends Component {

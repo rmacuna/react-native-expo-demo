@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     },
     customText: {
         fontSize: 16,
+        textAlign: 'center',
         fontFamily: 'GorditaMedium',
         color: '#323031'
     }
