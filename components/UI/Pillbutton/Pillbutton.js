@@ -7,6 +7,8 @@ import {
     StyleSheet,
     Platform
 } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons';
+
 
 const Pillbutton = (props) => {
     const content = (
@@ -16,13 +18,17 @@ const Pillbutton = (props) => {
             props.disabled ? styles.disabled : null,
             props.style
             ]}>
-            <Text style={[styles.customText, props.disabled ? styles.disabledText : null, { color: props.textColor }]} >{props.children}</Text>
+            {props.icon ?
+                <FontAwesome5 style={{ alignItems: 'flex-end' }} name="arrow-right" size={18} />
+                : null}
+            <Text style={[styles.customText, props.disabled ? styles.disabledText : null, { color: props.textColor }]}>{props.children}</Text>
+
         </View>
     )
     if (Platform.OS === "android") {
         return (
             <TouchableNativeFeedback
-                style={{zIndex: 2}}
+                style={{ zIndex: 2 }}
                 background={TouchableNativeFeedback.Ripple()}
                 onPress={props.onPress}>
                 {content}
@@ -30,7 +36,7 @@ const Pillbutton = (props) => {
         )
     }
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             activeOpacity={.9}
             onPress={props.onPress}>
             {content}
@@ -42,8 +48,8 @@ const styles = StyleSheet.create({
     defaultButton: {
         borderRadius: 100,
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center',
+        textAlign: 'center',
         padding: 12,
         shadowColor: 'rgba(0,15,69,1)',
         shadowOffset: { width: 0, height: 4 },
@@ -53,6 +59,7 @@ const styles = StyleSheet.create({
     },
     customText: {
         fontSize: 16,
+        paddingLeft: '35%',
         textAlign: 'center',
         fontFamily: 'GorditaMedium',
         color: '#323031'

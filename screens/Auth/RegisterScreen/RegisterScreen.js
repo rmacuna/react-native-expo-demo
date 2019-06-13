@@ -39,7 +39,7 @@ export default class RegisterScreen extends Component {
 
 
     _registerHandler = () => {
-
+        this.props.navigation.navigate('Home')
     }
 
     render() {

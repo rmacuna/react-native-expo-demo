@@ -4,6 +4,7 @@ import CustomInput from '../../../components/UI/CustomInput/CustomInput';
 import PillButton from '../../../components/UI/Pillbutton/Pillbutton';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Platform } from '@unimodules/core';
+import { FontAwesome5 } from '@expo/vector-icons';
 // import Pills from './../../../assets/images/pills.png';
 class LoginScreen extends Component {
 
@@ -78,8 +79,15 @@ class LoginScreen extends Component {
                                 <Text style={styles.footerAction}>Olvide la contraseña</Text>
                             </TouchableOpacity>
                         </View>
-                    </View>
 
+                    </View>
+                    <FontAwesome5.Button
+                        borderRadius={100}
+                        name="facebook"
+                        backgroundColor="#3b5998"
+                        onPress={console.log('d')}>
+                        Login with Facebook
+                        </FontAwesome5.Button>
                     {/* <Button title="Navigate" onPress={() => this.props.navigation.navigate('Register')} /> */}
 
                 </View>
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
     },
     bottomFotterWrapper: {
         width: '100%',
-        height: '35%',
+        height: '25%',
         marginLeft: '2%',
         flexDirection: 'row',
         alignItems: 'center',

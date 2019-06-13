@@ -3,7 +3,11 @@ export const COLOR_PRIMARY = '#FFC857';
 export const COLOR_SECONDARY = '#36284C';
 export const COLOR_DARK = '#323031';
 export const COLOR_LIGHT = '#F6F6F6';
+export const COLOR_EMPHASIS = '#FF8F73';
 
+export const DISABLED_BUTTON_COLOR = 'rgba(80,66,101,.8)';
+export const DISABLED_BUTTON_TEXTCOLOR = 'rgba(150,150,150,1)';
+export const HOME_BACKGROUND_COLOR = '#504265'; 
 
 
 
