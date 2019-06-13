@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ImageBackground } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-navigation';
-import { HOME_BACKGROUND_COLOR} from './../../../constants/constants';
+import { HOME_BACKGROUND_COLOR } from './../../../constants/constants';
 
 export default class CateScreen extends Component {
     render() {
         return (
-            <Text>Categorias</Text>
+            <SafeAreaView>
+                <Text>Categorias</Text>
+            </SafeAreaView>
 
         )
     }

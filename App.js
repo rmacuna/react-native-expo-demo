@@ -28,7 +28,7 @@ const AppStack = createBottomTabNavigator({
     defaultNavigationOptions: ({navigation}) => ({
       tabBarIcon: ({focused, horizontal, tintColor}) => {
         const { routeName } = navigation.state;
-        let iconComponent = FontAwesome;
+        // let iconComponent = FontAwesome;
         let iconName; 
         if (routeName === 'Search') {
           iconName = 'search';
@@ -39,7 +39,7 @@ const AppStack = createBottomTabNavigator({
         } else {
           iconName = 'list'
         }
-        return <FontAwesome name={iconName} size={14} color={tintColor} />
+        return <FontAwesome name={iconName} size={22} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',
@@ -55,6 +55,7 @@ const AppStack = createBottomTabNavigator({
         fontFamily: 'GorditaMedium'
       },
       style: {
+        height: Platform.OS === "android" ? 70 : 50,
         backgroundColor: constants.COLOR_SECONDARY,
       },
     }

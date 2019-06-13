@@ -1,7 +1,8 @@
 
 export const COLOR_PRIMARY = '#FFC857';
 export const COLOR_SECONDARY = '#36284C';
-export const COLOR_DARK = '#323031';
+export const COLOR_DARK = 'rgba(50,48,49,1)';
+export const COLOR_DARK_PLACEHOLDER = 'rgba(50,48,49,.6)';
 export const COLOR_LIGHT = '#F6F6F6';
 export const COLOR_EMPHASIS = '#FF8F73';
 

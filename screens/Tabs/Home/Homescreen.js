@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image, TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
 import { HOME_BACKGROUND_COLOR, COLOR_EMPHASIS, COLOR_PRIMARY } from '../../../constants/constants';
 import { SafeAreaView } from 'react-navigation';
 import { FontAwesome5 } from '@expo/vector-icons';
 import NavyButton from '../../../components/UI/NavyButton/NavyButton';
+import { Platform } from '@unimodules/core';
 
 export default class Homescreen extends Component {
 
@@ -11,13 +12,20 @@ export default class Homescreen extends Component {
     _onPressButtonHandler = () => {
     }
 
+    _onNavigateTo = route => this.props.navigator.navigate(route)
+
     render() {
         return (
-            <View style={{ backgroundColor: HOME_BACKGROUND_COLOR, height: '100%', width: '100%' }}>
+            <View
+                style={{
+                        backgroundColor: HOME_BACKGROUND_COLOR,
+                        height: '100%',
+                        width: '100%',
+                    }}>
                 <ImageBackground
                     style={{
                         width: '100%',
-                        height: 560
+                        height: 560,
                     }}
                     source={require('./../../../assets/images/homeSvgBackground.png')} >
                     <SafeAreaView>
@@ -69,29 +77,29 @@ export default class Homescreen extends Component {
                                     <Text style={styles.inlineSubtitle}>Añadir</Text>
                                 </View>
                                 <View style={styles.horizontalWrapper}>
-                                    <View style={{ alignItems: 'center'}}>
+                                    <View style={{ alignItems: 'center' }}>
                                         <View style={styles.cardCircle}>
                                             <Image
-                                                style={{ width: 50, height: 50 }}
+                                                style={{ width: 35, height: 35 }}
                                                 source={require('../../../assets/images/pills.png')}
                                             />
                                         </View>
                                         <Text style={styles.hint}>Pastilla</Text>
                                     </View>
-                                    <View style={{ alignItems: 'center'}}>
+                                    <View style={{ alignItems: 'center' }}>
                                         <View style={styles.cardCircle}>
                                             <Image
                                                 source={require('../../../assets/images/weekly-calendar.png')}
-                                                style={{ width: 50, height: 50 }}
+                                                style={{ width: 35, height: 35 }}
                                             />
                                         </View>
                                         <Text style={styles.hint}>Cita</Text>
                                     </View>
-                                    <View style={{ alignItems: 'center'}}>
+                                    <View style={{ alignItems: 'center' }}>
                                         <View style={styles.cardCircle}>
                                             <Image
                                                 source={require('../../../assets/images/folder.png')}
-                                                style={{ width: 50, height: 50 }}
+                                                style={{ width: 35, height: 35 }}
                                             />
                                         </View>
                                         <Text style={styles.hint}>Categoria</Text>
@@ -113,6 +121,7 @@ const styles = StyleSheet.create({
         paddingTop: 45,
         paddingLeft: 25,
         paddingRight: 25,
+        marginTop: Platform.OS === "android" ? 20 : null
     },
     title: {
         color: '#fff',
@@ -121,15 +130,15 @@ const styles = StyleSheet.create({
     },
     card: {
         marginTop: 12,
-        width: 139,
-        height: 139,
+        width: '40%',
+        height: '100%',
         backgroundColor: '#504265',
         borderRadius: 12,
         padding: 15
     },
     cardCircle: {
-        width: 85,
-        height: 85,
+        width: 70,
+        height: 70,
         backgroundColor: '#FFE3DC',
         borderRadius: 100,
         justifyContent: 'center',

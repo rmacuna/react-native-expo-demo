@@ -26,7 +26,6 @@ const NavyButton = (props) => {
 
 const styles = StyleSheet.create({
     navyButton: {
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 15,
