@@ -4,8 +4,9 @@ import { SafeAreaView } from 'react-navigation';
 import { COLOR_PRIMARY, COLOR_DARK, COLOR_DARK_PLACEHOLDER } from '../../../constants/constants';
 import { TextInput } from 'react-native-gesture-handler';
 import NavyButton from './../../../components/UI/NavyButton/NavyButton';
-export default class Searchscreen extends Component {
 
+
+export default class Searchscreen extends Component {
     state = {
         controls: {
             input: {
