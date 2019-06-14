@@ -1,6 +1,11 @@
 import { StyleSheet, Platform } from 'react-native';
-import { COLOR_PRIMARY, COLOR_EMPHASIS } from './../../../constants/constants';
+import { COLOR_PRIMARY, COLOR_EMPHASIS, HOME_BACKGROUND_COLOR } from './../../../constants/constants';
 export default StyleSheet.create({
+    mainWrapper: {
+        backgroundColor: HOME_BACKGROUND_COLOR, 
+        height: '100%',
+        width: '100%'
+    },
     topContainer: {
         width: '100%',
         paddingTop: 45,
@@ -12,14 +17,6 @@ export default StyleSheet.create({
         color: '#fff',
         fontSize: 30,
         fontFamily: 'GorditaBold'
-    },
-    cardCircle: {
-        width: 70,
-        height: 70,
-        backgroundColor: '#FFE3DC',
-        borderRadius: 100,
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     subtitle: {
         color: 'rgba(255,255,255, .8)',
