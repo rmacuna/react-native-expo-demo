@@ -19,7 +19,7 @@ export const FONT_SIZE = {
     small: 12,
     medium: 14,
     large: 16,
-    xlarge: 18
+    xlarge: 24
 }
 
 export const HEADER_REGISTER_STYLE = {

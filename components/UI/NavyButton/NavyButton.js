@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, TouchableHighlight} from 'react-native';
-import styles from './NavyButton.style'; 
+import { Text, TouchableHighlight } from 'react-native';
+import styles from './NavyButton.style';
 
 const NavyButton = (props) => {
     return (
@@ -11,12 +11,13 @@ const NavyButton = (props) => {
                 props.disabled ? styles.disabled : null,
                 props.style
             ]}
-            underlayColor="rgba(240,240,240,1)"
+            underlayColor={props.underlayColor ? props.underlayColor : "rgba(240,240,240,1)"}
             activeOpacity={0.80}
             onPress={props.onPress}>
             <Text
                 style={[
                     styles.navyButtonText,
+                    { color: props.color },
                     props.disabled ? styles.disabledText : null]}>
                 {props.children}
             </Text>
