@@ -5,6 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "test": "jest",
     "eject": "expo eject"
   },
   "dependencies": {
@@ -18,8 +19,21 @@
     "react-navigation": "^3.11.0",
     "react-redux": "^7.0.3"
   },
+  "jest": {
+    "preset": "jest-expo",
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
+  },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "babel-preset-expo": "^5.1.1",
+    "jest-expo": "^33.0.2",
+    "react-test-renderer": "^16.8.6"
   },
   "private": true
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Additems from './../Additems';
+import SearchScreen from './../Searchscreen';
 
-describe('<Additems />', () => {
+describe('<SearchScreen />', () => {
     it('has 1 child', () => {
-        const tree = renderer.create(<Additems />).toJSON();
+        const tree = renderer.create(<SearchScreen />).toJSON();
         expect(tree.children.length).toBe(3);
     })
 })
