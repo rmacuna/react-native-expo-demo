@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import CustomInput from '../../../components/UI/CustomInput/CustomInput';
 import Pillbutton from '../../../components/UI/Pillbutton/Pillbutton';
+import styles from './RegisterScreen.styles';
 
 export default class RegisterScreen extends Component {
 
@@ -114,33 +115,3 @@ export default class RegisterScreen extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    ImageAndTitleWrapper: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        paddingTop: 15
-    },
-    registerInput: {
-        fontSize: 16
-    },
-    inputsWrapper: {
-        padding: 38,
-        width: '100%'
-    },
-    title: {
-        color: '#fff',
-        fontFamily: 'GorditaMedium',
-        fontSize: 24,
-        width: '35%'
-    },
-    buttonWrapper: {
-        width: '100%',
-        padding: 37
-    },
-    textCustom: {
-        fontFamily: 'GorditaMedium'
-    }
-})

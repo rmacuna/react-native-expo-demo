@@ -5,6 +5,7 @@ export const COLOR_PRIMARY = '#FFC857';
 export const COLOR_SECONDARY = '#36284C';
 export const COLOR_DARK = 'rgba(50,48,49,1)';
 export const COLOR_DARK_PLACEHOLDER = 'rgba(50,48,49,.6)';
+
 export const COLOR_LIGHT = '#F6F6F6';
 export const COLOR_EMPHASIS = '#FF8F73';
 
@@ -18,7 +19,7 @@ export const FONT_SIZE = {
     small: 12,
     medium: 14,
     large: 16,
-    xlarge: 18
+    xlarge: 24
 }
 
 export const HEADER_REGISTER_STYLE = {
