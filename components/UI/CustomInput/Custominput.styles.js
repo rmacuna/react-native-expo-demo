@@ -8,13 +8,13 @@ export default StyleSheet.create({
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
-        marginBottom: -20 // Deberia interpolar de -20 a 5
+        // marginBottom: -20 // Deberia interpolar de -20 a 5
     },
     label_ANDROID: {
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
-        marginBottom: -25, // Deberia interpolar de -25 a 0 
+        // marginBottom: -25, // Deberia interpolar de -25 a 0 
     },
     lineInput: {
         width: '100%',
