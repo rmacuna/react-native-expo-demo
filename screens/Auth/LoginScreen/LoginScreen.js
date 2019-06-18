@@ -4,6 +4,7 @@ import CustomInput from '../../../components/UI/CustomInput/CustomInput';
 import PillButton from '../../../components/UI/Pillbutton/Pillbutton';
 import { FontAwesome5 } from '@expo/vector-icons';
 import styles from './LoginScreen.styles';
+import NavyButton from './../../../components/UI/NavyButton/NavyButton';
 
 
 class LoginScreen extends Component {
@@ -24,6 +25,10 @@ class LoginScreen extends Component {
                 }
             }
         }
+    }
+
+    _onClickHandler = () => {
+        alert('Pressed')
     }
 
     render() {
@@ -53,13 +58,13 @@ class LoginScreen extends Component {
                             onTextChange={this.state.controls.username.value} />
                     </View>
                     <View style={styles.buttonMiddleWrapper} >
-                        <PillButton
-                            backgroundColor="#fff">
-                            Ingresar
-                        </PillButton>
+                        {/* <NavyButton backgroundColor="#fff">Ingresar</NavyButton> */}
+                        <PillButton 
+                             onPress={this._onClickHandler} 
+                             backgroundColor="#fff">Ingresar</PillButton>
                     </View>
-
                     <View style={styles.bottomFotterWrapper}>
+
                         <View style={styles.item}>
                             <TouchableOpacity
                                 onPress={

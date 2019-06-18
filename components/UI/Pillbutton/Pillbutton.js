@@ -3,42 +3,37 @@ import {
     View,
     Text,
     TouchableNativeFeedback,
-    TouchableOpacity,
+    TouchableHighlight,
     Platform
 } from 'react-native';
 import styles from './Pillbutton.styles';
-import { FontAwesome5 } from '@expo/vector-icons';
 
 const Pillbutton = (props) => {
-    const content = (
-        <View style={
-            [styles.defaultButton,
-            { backgroundColor: props.backgroundColor },
-            props.disabled ? styles.disabled : null,
-            props.style
-            ]}>
-            {props.icon ?
-                <FontAwesome5 style={{ alignItems: 'flex-end' }} name="arrow-right" size={18} />
-                : null}
-            <Text style={[styles.customText, props.disabled ? styles.disabledText : null, { color: props.textColor }]}>{props.children}</Text>
-        </View>
-    )
-    if (Platform.OS === "android") {
+    if (Platform.OS === "ios") {
+        
+        return (
+            <TouchableHighlight
+                onPress={props.onPress}
+                underlayColor={props.underlayColor ? props.underlayColor : "rgba(240,240,240,1)"}
+                activeOpacity={0.8}
+                style={[
+                    styles.defaultButton,
+                    { backgroundColor: props.backgroundColor },
+                    props.disabled ? styles.disabled : null,
+                    props.style
+                ]}>
+                <Text style={[styles.customText, props.disabled ? styles.disabledText : null]}>{props.children}</Text>
+            </TouchableHighlight>
+        )
+    } else {
         return (
             <TouchableNativeFeedback
-                style={{ zIndex: 2 }}
                 background={TouchableNativeFeedback.Ripple()}
+                style={styles.androidButton}
                 onPress={props.onPress}>
-                {content}
+                <Text style={[styles.customText, props.disabled ? styles.disabledText : null]}>{props.children}</Text>
             </TouchableNativeFeedback>
         )
     }
-    return (
-        <TouchableOpacity
-            activeOpacity={.9}
-            onPress={props.onPress}>
-            {content}
-        </TouchableOpacity>
-    )
 }
 export default Pillbutton

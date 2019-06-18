@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -16,7 +17,7 @@ export default StyleSheet.create({
         color: '#000',
     },
     bottomFotterWrapper: {
-        width: '100%',
+        // width: '100%',
         height: '25%',
         marginLeft: '2%',
         flexDirection: 'row',
@@ -25,7 +26,6 @@ export default StyleSheet.create({
     },
     buttonMiddleWrapper: {
         paddingTop: 90,
-        width: '100%',
     },
     pillImage: {
         width: 173,
