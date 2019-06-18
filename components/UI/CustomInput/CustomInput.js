@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Text, TextInput, View, Platform, Animated } from 'react-native'
+import { Text, TextInput, View, Platform, Animated, Easing } from 'react-native'
 import styles from './Custominput.styles';
+import { COLOR_DARK, COLOR_LIGHT, COLOR_DARK_PLACEHOLDER } from '../../../constants/constants';
 
 
 
@@ -12,18 +13,38 @@ import styles from './Custominput.styles';
 
 const CustomInput = (props) => {
 
-    const [ animation, useAnimation ] = useState({
-        initialPadding: new Animated.Value(Platform.OS === "android" ? -25 : -20)
+    const [animation, useAnimation] = useState({
+        initialBottomRange: new Animated.Value(50),
+        initialColor: new Animated.Value(50),
     })
 
     _onFocusInput = () => {
-       Animated.timing(
-           animation.initialPadding,
-           {
-               toValue: Platform.OS === "ios" ? 5 : 0,
-               duration: 200
-           }
-       ).start();
+        Animated.parallel([
+            Animated.timing(
+                animation.initialBottomRange,
+                {
+                    toValue: 100,
+                    duration: 100,
+                    easing: Easing.linear
+                }
+            ),
+            Animated.timing(
+                animation.initialColor,
+                {
+                    toValue: 100,
+                    duration: 200,
+                    easing: Easing.linear
+                }
+            )
+        ]).start();
+        //    Animated.timing(
+        //        animation.initialBottomRange,
+        //        {
+        //            toValue: 100,
+        //            duration: 200,
+        //            easing: Easing.linear
+        //        }
+        //    ).start();
     }
     return (
 
@@ -31,12 +52,23 @@ const CustomInput = (props) => {
             <Animated.Text style={
                 [Platform.OS === "ios" ?
                     styles.label_IOS : styles.label_ANDROID,
-                // Platform.OS === "ios" ? { marginBottom: animation.initialPadding } : { marginBottom: animation.initialPadding },
+                {
+                    bottom: animation.initialBottomRange.interpolate(
+                        {
+                            inputRange: [50, 100],
+                            outputRange: ['50%', '100%']
+                        }
+                    ),
+                    color: animation.initialColor.interpolate(
+                        {
+                            inputRange: [50, 100],
+                            outputRange: [COLOR_DARK, COLOR_DARK_PLACEHOLDER]
+                        }
+                    )
+                },
                 props.labelColor]
             }> {props.label} </Animated.Text>
-            <TextInput
-                {...props}
-                onFocus={_onFocusInput}
+            <TextInput {...props} onFocus={_onFocusInput}
                 style={
                     Platform.OS === "ios" ?
                         [styles.input_IOS, props.style, props.textColor] :

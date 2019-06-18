@@ -4,13 +4,14 @@ export default StyleSheet.create({
     container: {
         position: 'relative',
         width: '100%',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
         height: 40,
     },
     label_IOS: {
         position: 'absolute',
         bottom: '50%',
-        left: 0,
-        transform: ([{ scaleX: 1 }, { scaleY: 1 }]),
+        left: -4,
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
@@ -18,6 +19,7 @@ export default StyleSheet.create({
     },
     label_ANDROID: {
         fontFamily: 'GorditaMedium',
+        bottom: '50%',
         fontSize: 16,
         color: '#323031',
         // marginBottom: -25, // Deberia interpolar de -25 a 0 
