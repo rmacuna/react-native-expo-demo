@@ -18,7 +18,32 @@ const CustomInput = (props) => {
         initialColor: new Animated.Value(50),
     })
 
-    _onFocusInput = () => {
+
+    _onBlurHandler = () => {
+        if (props.value.trim().length === 0) {
+            Animated.parallel([
+                Animated.timing(
+                    animation.initialBottomRange,
+                    {
+                        toValue: 50,
+                        duration: 100,
+                        easing: Easing.linear
+                    }
+                ),
+                Animated.timing(
+                    animation.initialColor,
+                    {
+                        toValue: 50,
+                        duration: 100,
+                        easing: Easing.linear
+                    }
+                )
+            ]).start();
+        }
+
+    }
+
+    _onFocusInputHandler = () => {
         Animated.parallel([
             Animated.timing(
                 animation.initialBottomRange,
@@ -37,38 +62,30 @@ const CustomInput = (props) => {
                 }
             )
         ]).start();
-        //    Animated.timing(
-        //        animation.initialBottomRange,
-        //        {
-        //            toValue: 100,
-        //            duration: 200,
-        //            easing: Easing.linear
-        //        }
-        //    ).start();
     }
     return (
 
         <View style={[styles.container, { marginBottom: props.separation }]}>
             <Animated.Text style={
-                [Platform.OS === "ios" ?
-                    styles.label_IOS : styles.label_ANDROID,
-                {
-                    bottom: animation.initialBottomRange.interpolate(
-                        {
-                            inputRange: [50, 100],
-                            outputRange: ['50%', '100%']
-                        }
-                    ),
-                    color: animation.initialColor.interpolate(
-                        {
-                            inputRange: [50, 100],
-                            outputRange: [COLOR_DARK, COLOR_DARK_PLACEHOLDER]
-                        }
-                    )
-                },
-                props.labelColor]
+                [
+                    Platform.OS === "ios" ? styles.label_IOS : styles.label_ANDROID,
+                    {
+                        bottom: animation.initialBottomRange.interpolate(
+                            {
+                                inputRange: [50, 100],
+                                outputRange: ['50%', '100%']
+                            }
+                        ),
+                        color: animation.initialColor.interpolate(
+                            {
+                                inputRange: [50, 100],
+                                outputRange: [COLOR_DARK, COLOR_DARK_PLACEHOLDER]
+                            }
+                        )
+                    },
+                    props.labelColor]
             }> {props.label} </Animated.Text>
-            <TextInput {...props} onFocus={_onFocusInput}
+            <TextInput {...props} onFocus={_onFocusInputHandler} onBlur={_onBlurHandler}
                 style={
                     Platform.OS === "ios" ?
                         [styles.input_IOS, props.style, props.textColor] :

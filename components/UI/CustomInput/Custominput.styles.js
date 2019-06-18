@@ -1,4 +1,5 @@
 import { StyleSheet  } from 'react-native';
+import { Platform } from '@unimodules/core';
 
 export default StyleSheet.create({
     container: {
@@ -18,8 +19,10 @@ export default StyleSheet.create({
         // marginBottom: -20 // Deberia interpolar de -20 a 5
     },
     label_ANDROID: {
-        fontFamily: 'GorditaMedium',
+        position: 'absolute',
         bottom: '50%',
+        left: -4,
+        fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
         // marginBottom: -25, // Deberia interpolar de -25 a 0 
@@ -39,6 +42,7 @@ export default StyleSheet.create({
         width: '100%',
         zIndex: 1,
         paddingBottom: '1%',
+        // paddingTop: Platform.OS === "android " ? -25 : 0,
         fontFamily: 'GorditaMedium'
     }
 })

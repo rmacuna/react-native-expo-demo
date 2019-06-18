@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet , Platform } from 'react-native';
 export default StyleSheet.create({
     defaultButton: {
         justifyContent: 'center',
@@ -10,7 +10,7 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.25,
         shadowRadius: 15,
-        elevation: 2
+        elevation: Platform.OS === "android" ? 2 : null 
     },
     customText: {
         fontSize: 16,
