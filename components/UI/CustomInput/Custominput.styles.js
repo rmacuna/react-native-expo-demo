@@ -2,9 +2,15 @@ import { StyleSheet  } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-        marginBottom: 10
+        position: 'relative',
+        width: '100%',
+        height: 40,
     },
     label_IOS: {
+        position: 'absolute',
+        bottom: '50%',
+        left: 0,
+        transform: ([{ scaleX: 1 }, { scaleY: 1 }]),
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
@@ -25,7 +31,6 @@ export default StyleSheet.create({
         width: '100%',
         zIndex: 1,
         paddingBottom: 6,
-
         fontFamily: 'GorditaMedium'
     },
     input_ANDROID: {

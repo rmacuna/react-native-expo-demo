@@ -25,7 +25,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     buttonMiddleWrapper: {
-        paddingTop: 90,
+        paddingTop: 40,
     },
     pillImage: {
         width: 173,

@@ -31,7 +31,7 @@ const CustomInput = (props) => {
             <Animated.Text style={
                 [Platform.OS === "ios" ?
                     styles.label_IOS : styles.label_ANDROID,
-                Platform.OS === "ios" ? { marginBottom: animation.initialPadding } : { marginBottom: animation.initialPadding },
+                // Platform.OS === "ios" ? { marginBottom: animation.initialPadding } : { marginBottom: animation.initialPadding },
                 props.labelColor]
             }> {props.label} </Animated.Text>
             <TextInput
