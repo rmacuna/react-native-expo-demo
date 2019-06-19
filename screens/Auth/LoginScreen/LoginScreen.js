@@ -59,38 +59,33 @@ class LoginScreen extends Component {
                         passwordValue={this.state.controls.password.value}
                         onEmailChange={(value) => this._onInputChangeHandler(value, 'username')}
                         onPasswordChange={(value) => this._onInputChangeHandler(value, 'password')} />
-                  
-                  
+
                     <View style={styles.buttonMiddleWrapper} >
-                        <PillButton
-
-                            onPress={this._onClickHandler}
-                            backgroundColor="#fff">Ingresar</PillButton>
+                        <PillButton style={{width: '100%'}} onPress={this._onClickHandler} backgroundColor="#fff">Ingresar</PillButton>
                     </View>
-                    <View style={styles.bottomFotterWrapper}>
+                </View>
 
-                        <View style={styles.item}>
-                            <TouchableOpacity
-                                onPress={this._onCreateAccountHandler}>
-                                <Text style={[styles.footerAction, { padding: 20, zIndex: 2 }]}>Crear una cuenta</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.lineSeparador}></View>
-                        <View style={[styles.item, Platform.OS === 'android' ? { marginLeft: 20, zIndex: 2 } : null]}>
-                            <TouchableOpacity>
-                                <Text style={styles.footerAction}>Olvide la contraseña</Text>
-                            </TouchableOpacity>
-                        </View>
-
+                <View style={styles.bottomFotterWrapper}>
+                    <View style={styles.item}>
+                        <TouchableOpacity
+                            onPress={this._onCreateAccountHandler}>
+                            <Text style={[styles.footerAction, { padding: 20, zIndex: 2 }]}>Crear una cuenta</Text>
+                        </TouchableOpacity>
                     </View>
+                    <View style={styles.lineSeparador}></View>
+                    <View style={[styles.item, Platform.OS === 'android' ? { marginLeft: 20, zIndex: 2 } : null]}>
+                        <TouchableOpacity>
+                            <Text style={styles.footerAction}>Olvide la contraseña</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.bottomFotterWrapper}>
                     <FontAwesome5.Button
                         borderRadius={100}
                         name="facebook"
                         backgroundColor="#3b5998">
                         Login with Facebook
                         </FontAwesome5.Button>
-                    {/* <Button title="Navigate" onPress={() => this.props.navigation.navigate('Register')} /> */}
-
                 </View>
 
             </View>

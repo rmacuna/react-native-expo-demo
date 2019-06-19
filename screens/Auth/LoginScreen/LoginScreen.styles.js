@@ -12,17 +12,19 @@ export default StyleSheet.create({
         height: '80%',
         backgroundColor: '#000'
     },
-  
     bottomFotterWrapper: {
         // width: '100%',
-        height: '25%',
-        marginLeft: '2%',
+        padding: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     buttonMiddleWrapper: {
-        paddingTop: 40,
+        flexDirection: 'row',
+        position: 'relative',
+        bottom: '-5%',
+        justifyContent: 'center'
+        // marginTop: 40,
     },
     item: {
         flex: 1,
@@ -35,14 +37,13 @@ export default StyleSheet.create({
         backgroundColor: '#FFC857',
         width: '100%',
         height: '70%',
+        zIndex: -1,
         paddingTop: 32,
         paddingRight: 37,
         paddingLeft: 37,
         paddingBottom: 57
     },
-    inputWrapper: {
-        width: '100%',
-    },
+    
     textCustom: {
         fontFamily: 'GorditaMedium'
     },
