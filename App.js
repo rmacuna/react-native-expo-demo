@@ -68,6 +68,7 @@ const AuthStack = createStackNavigator({
       header: null
     })
   },
+  
   Register: {
     screen: RegisterScreen,
     navigationOptions: () => ({

@@ -39,6 +39,18 @@ export default class RegisterScreen extends Component {
     }
 
 
+    _onInputChangeHandler = (value, key) => {
+        this.setState({
+            controls: {
+                ...this.state.controls,
+                [key]: {
+                    ...this.state.controls[key],
+                    value: value
+                }
+            }
+        })
+    }
+
     _registerHandler = () => {
         this.props.navigation.navigate('Home')
     }
@@ -66,7 +78,8 @@ export default class RegisterScreen extends Component {
                         textColor={{ color: '#fff' }}
                         lineColor={{ backgroundColor: 'rgba(254,254,254, .8)' }}
                         style={styles.registerInput}
-                        onTextChange={this.state.controls.inputName}
+                        value={this.state.controls.inputName.value}
+                        onChangeText={(value) => this._onInputChangeHandler(value, 'inputName')}
                     />
                     <CustomInput
                         separation={45}
@@ -77,7 +90,8 @@ export default class RegisterScreen extends Component {
                         textColor={{ color: '#fff' }}
                         lineColor={{ backgroundColor: 'rgba(254,254,254, .8)' }}
                         style={styles.registerInput}
-                        onTextChange={this.state.controls.inputEmail}
+                        value={this.state.controls.inputEmail.value}
+                        onChangeText={(value) => this._onInputChangeHandler(value, 'inputEmail')}
                     />
                     <CustomInput
                         separation={45}
@@ -87,7 +101,8 @@ export default class RegisterScreen extends Component {
                         textColor={{ color: '#fff' }}
                         lineColor={{ backgroundColor: 'rgba(254,254,254, .8)' }}
                         style={styles.registerInput}
-                        onTextChange={this.state.controls.inputPassword}
+                        value={this.state.controls.inputPassword.value}
+                        onChangeText={(value) => this._onInputChangeHandler(value, 'inputPassword')}
                     />
                     <CustomInput
                         separation={45}
@@ -97,7 +112,8 @@ export default class RegisterScreen extends Component {
                         textColor={{ color: '#fff' }}
                         lineColor={{ backgroundColor: 'rgba(254,254,254, .8)' }}
                         style={styles.registerInput}
-                        onTextChange={this.state.controls.inputConfirmPass}
+                        value={this.state.controls.inputConfirmPass.value}
+                        onChangeText={(value) => this._onInputChangeHandler(value, 'inputConfirmPass')}
                     />
                 </View>
 
