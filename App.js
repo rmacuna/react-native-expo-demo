@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator,
+  createAppContainer
+} from 'react-navigation';
+
 import * as Font from 'expo-font';
 
-import {Dimensions , Platform} from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 // Import de ventanas del tab screen.
 import HomeScreen from './screens/Tabs/Home/Homescreen';
@@ -13,8 +19,11 @@ import CategoryScreen from './screens/Tabs/Categories/CateScreen';
 import LogInScreen from './screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
 import AuthLoadingScreen from './screens/Auth/AuthLoading';
-import {FontAwesome} from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
 import * as constants from './constants/constants';
+import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
+
+
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
  Luego se debe crear el stack de navegacion de tabs y el switch navigator para ir
@@ -25,16 +34,16 @@ const AppStack = createBottomTabNavigator({
   Home: HomeScreen,
   Categories: CategoryScreen
 }, {
-    defaultNavigationOptions: ({navigation}) => ({
-      tabBarIcon: ({focused, horizontal, tintColor}) => {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         // let iconComponent = FontAwesome;
-        let iconName; 
+        let iconName;
         if (routeName === 'Search') {
           iconName = 'search';
           // En caso tal de querer tener un icono con una badge.
           // iconComponent = HomeIconWithBadge;
-        } else if ( routeName === 'Home' ) {
+        } else if (routeName === 'Home') {
           iconName = 'home';
         } else {
           iconName = 'list'
@@ -48,7 +57,7 @@ const AppStack = createBottomTabNavigator({
       inactiveTintColor: '#fff',
       activeTintColor: constants.COLOR_PRIMARY,
       adaptive: true,
-      
+
       labelStyle: {
         fontSize: 12,
         paddingBottom: Platform.OS === "android" ? 10 : null,
@@ -68,7 +77,7 @@ const AuthStack = createStackNavigator({
       header: null
     })
   },
-  
+
   Register: {
     screen: RegisterScreen,
     navigationOptions: () => ({
@@ -79,6 +88,13 @@ const AuthStack = createStackNavigator({
       headerTitleStyle: {
         ...constants.HEADER_REGISTER_STYLE.HeaderTitle
       }
+    })
+  },
+
+  ForgotPass: {
+    screen: ForgotPasswordScreen,
+    navigationOptions: () => ({
+      
     })
   }
 });

@@ -50,7 +50,7 @@ const CustomInput = (props) => {
                 {
                     toValue: 100,
                     duration: 100,
-                    easing: Easing.linear
+                    easing: Easing.linear,
                 }
             ),
             Animated.timing(

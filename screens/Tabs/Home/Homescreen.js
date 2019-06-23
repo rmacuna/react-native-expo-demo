@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, Image } from 'react-native';
+import { Text, View, ImageBackground, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import CategorySlider from './../../../components/Home/CategorySlider/CategorySlider';
 import styles from './Homescreen.styles';
 import Header from '../../../components/Home/Header/Header';
 import Additems from '../../../components/Home/AddItems/Additems';
 
-export default class Homescreen extends Component {
+class Homescreen extends Component {
+
+
+    state = {
+        animations: {
+            circleInitialScale: new Animated.Value(0),
+            itemsInitialOpacity: new Animated.Value(0)
+        }
+    }
+
+
+    componentDidMount() {
+        Animated.parallel([
+            Animated.spring()
+        ])
+    }
 
     _onPressButtonHandler = () => {
         alert('Your next pill is play :)')
@@ -27,7 +42,8 @@ export default class Homescreen extends Component {
                             <View style={styles.horizontalWrapper}>
                                 <Text style={styles.inlineSubtitle}>Añadir</Text>
                             </View>
-                            <Additems />
+                            <Additems 
+                                initialScale={this.state.animations.circleInitialScale} />
                         </View>
                     </SafeAreaView>
                 </ImageBackground>
@@ -35,4 +51,6 @@ export default class Homescreen extends Component {
         )
     }
 }
+
+export default Homescreen
 

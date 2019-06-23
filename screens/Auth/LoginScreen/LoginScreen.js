@@ -49,6 +49,12 @@ class LoginScreen extends Component {
             }
         })
     }
+
+    _onForgotPasswordHandler = () => {
+        this.props.navigation.navigate('ForgotPass')
+    }
+
+
     render() {
         return (
             <View style={styles.container}>
@@ -74,7 +80,7 @@ class LoginScreen extends Component {
                     </View>
                     <View style={styles.lineSeparador}></View>
                     <View style={[styles.item, Platform.OS === 'android' ? { marginLeft: 20, zIndex: 2 } : null]}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={this._onForgotPasswordHandler}>
                             <Text style={styles.footerAction}>Olvide la contraseña</Text>
                         </TouchableOpacity>
                     </View>
