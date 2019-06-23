@@ -1,21 +1,19 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet , Platform } from 'react-native';
 export default StyleSheet.create({
     defaultButton: {
-        borderRadius: 100,
-        flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
-        textAlign: 'center',
-        padding: 12,
+        marginTop: 15,
+        padding: 14,
+        borderRadius: 100,
         shadowColor: 'rgba(0,15,69,1)',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.25,
         shadowRadius: 15,
-        elevation: 2
+        elevation: Platform.OS === "android" ? 2 : null 
     },
     customText: {
         fontSize: 16,
-        paddingLeft: '35%',
-        textAlign: 'center',
         fontFamily: 'GorditaMedium',
         color: '#323031'
     }

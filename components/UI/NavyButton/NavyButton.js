@@ -3,6 +3,7 @@ import { Text, TouchableHighlight } from 'react-native';
 import styles from './NavyButton.style';
 
 const NavyButton = (props) => {
+    
     return (
         <TouchableHighlight
             style={[

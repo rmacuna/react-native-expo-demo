@@ -1,20 +1,31 @@
 import { StyleSheet  } from 'react-native';
+import { Platform } from '@unimodules/core';
 
 export default StyleSheet.create({
     container: {
-        marginBottom: 10
+        position: 'relative',
+        width: '100%',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        height: 40,
     },
     label_IOS: {
+        position: 'absolute',
+        bottom: '50%',
+        left: -4,
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
-        marginBottom: -20 // Deberia interpolar de -20 a 5
+        // marginBottom: -20 // Deberia interpolar de -20 a 5
     },
     label_ANDROID: {
+        position: 'absolute',
+        bottom: '50%',
+        left: -4,
         fontFamily: 'GorditaMedium',
         fontSize: 16,
         color: '#323031',
-        marginBottom: -25, // Deberia interpolar de -25 a 0 
+        // marginBottom: -25, // Deberia interpolar de -25 a 0 
     },
     lineInput: {
         width: '100%',
@@ -25,13 +36,13 @@ export default StyleSheet.create({
         width: '100%',
         zIndex: 1,
         paddingBottom: 6,
-
         fontFamily: 'GorditaMedium'
     },
     input_ANDROID: {
         width: '100%',
         zIndex: 1,
         paddingBottom: '1%',
+        // paddingTop: Platform.OS === "android " ? -25 : 0,
         fontFamily: 'GorditaMedium'
     }
 })
