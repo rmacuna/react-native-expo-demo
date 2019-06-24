@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { COLOR_EMPHASIS } from './../../../constants/constants'
+import { COLOR_EMPHASIS, COLOR_LINK , FONT_SIZE} from './../../../constants/constants'
 
 
 export default StyleSheet.create({
@@ -11,7 +11,6 @@ export default StyleSheet.create({
     },
     card: {
         width: '90%',
-        height: '90%',
         borderRadius: 16,
         padding: 25,
         backgroundColor: '#fff',
@@ -28,6 +27,21 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        paddingBottom: 40,
+    },
+    middleRow: {
+        paddingTop: 35,
+    },
+    description: {
+        fontFamily: 'GorditaMedium',
+        fontSize:  16
+    },
+    imageWrapper: {
+        width: '100%',
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '30%',
     },
     title: {
         fontFamily: 'GorditaBold',
@@ -37,5 +51,10 @@ export default StyleSheet.create({
     padlock: {
         width: 54,
         height: 54
+    },
+    buttonBack: {
+        fontFamily: 'GorditaMedium',
+        color: COLOR_LINK,
+        fontSize: FONT_SIZE.large
     }
 })

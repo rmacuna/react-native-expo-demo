@@ -14,7 +14,7 @@ import { Dimensions, Platform } from 'react-native';
 import HomeScreen from './screens/Tabs/Home/Homescreen';
 import SearchScreen from './screens/Tabs/Search/Searchscreen';
 import CategoryScreen from './screens/Tabs/Categories/CateScreen';
-
+import Animated, { Transition, Easing } from 'react-native-reanimated';
 // Import del Auth stack.
 import LogInScreen from './screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
@@ -22,19 +22,96 @@ import AuthLoadingScreen from './screens/Auth/AuthLoading';
 import { FontAwesome } from '@expo/vector-icons'
 import * as constants from './constants/constants';
 import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
-
+import { useScreens } from 'react-native-screens';
+import CheckPnD from './screens/CheckPnD/CheckPnD';
 
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
  Luego se debe crear el stack de navegacion de tabs y el switch navigator para ir
  a la página principal. 
 */
+
+
+useScreens();
+
+
+// const SwitchHomeToChecks = createAnimatedSwitchNavigator({
+//   Check: CheckStack
+// })
+
+const fade = (sceneProps) => {
+
+  const { scene, position } = sceneProps;
+  const index = scene.index
+
+  const translateX = 0
+  const translateY = 0
+
+  const opacity = position.interpolate({
+    inputRange: [index - 0.7, index, index + 0.7],
+    outputRange: [0.3, 1, 0.3]
+  })
+
+  return {
+    opacity,
+    transform: [{ translateX }, { translateY }]
+  }
+}
+
+
+const CheckStack = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+
+      navigationOptions: () => ({
+        header: null
+      })
+    },
+    CheckPnD: {
+      screen: CheckPnD,
+      navigationOptions: () => ({
+        header: null
+      })
+    },
+  },
+  {
+    transitionConfig: () => ({
+      screenInterpolator: (props) => {
+        return fade(props)
+      }
+    })
+  }
+  // {
+  //   transitionConfig: () => {
+  //     return {
+  //       transitionSpec: {
+  //         duration: 400,
+  //         easing: Easing.in,
+  //         timing: Animated.timing,
+  //         useNativeDriver: true
+  //       },
+  //       screenInterpolator: (sceneProps) => {
+  //         // const witdh = layout.initWidth;
+  //         // const { index, route } = scene;
+  //         // const params = route.params || {}; // <- That's new
+  //         // const transition = params.transition || 'default'; // <- That's new
+  //         return {
+  //           fade: fade(sceneProps)
+  //         };
+  //       }
+  //     }
+  //   }
+  // }
+)
+
 const AppStack = createBottomTabNavigator({
   Search: SearchScreen,
-  Home: HomeScreen,
+  Home: CheckStack,
   Categories: CategoryScreen
 }, {
     defaultNavigationOptions: ({ navigation }) => ({
+      
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         // let iconComponent = FontAwesome;
@@ -77,7 +154,6 @@ const AuthStack = createStackNavigator({
       header: null
     })
   },
-
   Register: {
     screen: RegisterScreen,
     navigationOptions: () => ({
@@ -90,14 +166,16 @@ const AuthStack = createStackNavigator({
       }
     })
   },
-
   ForgotPass: {
     screen: ForgotPasswordScreen,
     navigationOptions: () => ({
-      
-    })
+      header: null,
+
+    }),
   }
 });
+
+
 
 const RouteConfig = {
   AuthLoading: AuthLoadingScreen,
@@ -107,7 +185,7 @@ const RouteConfig = {
 
 
 const StackNavigatorConfig = {
-  initialRouteName: 'AuthLoading',
+  initialRouteName: 'AuthLoading'
 }
 
 const AppNavigator = createSwitchNavigator(RouteConfig, StackNavigatorConfig)
@@ -129,9 +207,6 @@ export default class App extends Component {
 
     this.setState({ fontLoaded: true });
   }
-
-
-
   render() {
     return (
       this.state.fontLoaded ? (

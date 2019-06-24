@@ -23,6 +23,12 @@ class Homescreen extends Component {
         ])
     }
 
+    _onCardPress = type => {
+        if (type === 0) {
+            this.props.navigation.navigate('CheckPnD')
+        }
+    }
+
     _onPressButtonHandler = () => {
         alert('Your next pill is play :)')
     }
@@ -38,7 +44,10 @@ class Homescreen extends Component {
                     <SafeAreaView>
                         <View style={styles.topContainer}>
                             <Header onNextPillPress={this._onPressButtonHandler}  />
-                            <CategorySlider/>
+                            <CategorySlider 
+                                pillPress={() => this._onCardPress(0)}
+                                datePress={() => this._onCardPress(1)}
+                            />
                             <View style={styles.horizontalWrapper}>
                                 <Text style={styles.inlineSubtitle}>Añadir</Text>
                             </View>

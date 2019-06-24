@@ -36,13 +36,13 @@ export default StyleSheet.create({
         width: '100%',
         zIndex: 1,
         paddingBottom: 6,
-        fontFamily: 'GorditaMedium'
+        fontFamily: 'GorditaRegular'
     },
     input_ANDROID: {
         width: '100%',
         zIndex: 1,
         paddingBottom: '1%',
         // paddingTop: Platform.OS === "android " ? -25 : 0,
-        fontFamily: 'GorditaMedium'
+        fontFamily: 'GorditaRegular'
     }
 })

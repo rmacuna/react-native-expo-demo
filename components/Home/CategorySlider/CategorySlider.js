@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './CategorySlider.style';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { COLOR_EMPHASIS } from './../../../constants/constants';
 
-const CategorySlider = () => {
+const CategorySlider = (props) => {
     return (
         <View>
             <View style={styles.horizontalWrapper}>
@@ -14,15 +14,17 @@ const CategorySlider = () => {
             </View>
             <View style={styles.horizontalWrapper} >
                 {/* Debería ser un componente */}
-                <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Pastillas</Text>
-                    <View style={{ width: '100%', paddingTop: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image
-                            style={{ width: 75, height: 75 }}
-                            source={require('./../../../assets/images/medicine.png')}
-                        />
+                <TouchableWithoutFeedback onPress={props.pillPress} >
+                    <View style={styles.card}>
+                        <Text style={styles.cardTitle}>Pastillas</Text>
+                        <View style={{ width: '100%', paddingTop: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <Image
+                                style={{ width: 75, height: 75 }}
+                                source={require('./../../../assets/images/medicine.png')}
+                            />
+                        </View>
                     </View>
-                </View>
+                </TouchableWithoutFeedback>
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Citas</Text>
                     <View style={{ width: '100%', paddingTop: 10, justifyContent: 'center', alignItems: 'center' }}>
