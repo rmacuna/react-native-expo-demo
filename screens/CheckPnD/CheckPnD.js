@@ -21,24 +21,24 @@ class CheckPnD extends Component {
 
     state = {
         categories: [
-            {
-                key: '1',
-                label: 'Acetaminofen',
-                value: 'acetaminofen',
-                image: {uri: 'https://encolombia.com/wp-content/uploads/2014/04/acetaminofen-urg-1.jpg'}
-            },
-            {
-                key: '2',
-                label: 'Advil',
-                value: 'advil',
-                image: {uri: 'https://www.chedraui.com.mx/medias/750110876752-00-CH515Wx515H?context=bWFzdGVyfHJvb3R8MTEyMDMyfGltYWdlL2pwZWd8aDJiL2g2Yi85NDAxOTI0NjE2MjIyLmpwZ3wxZjFiNDMxNjFhMTRmMWRhNWE3OGZmMTMyMjQ4NTY2N2MxOWVlMmI3YTZkN2NmMDJhZWVlYzYwMzhjNzU0NThi'}
-            },
-            {
-                key: '3',
-                label: 'Ciprofloxacina',
-                value: 'ciprofloxacina',
-                image: {uri: 'https://sh-sci.org/wp-content/uploads/ciprofloxacino-para-que-sirve-como-se-toma-posologia-efectos-secundarios-precio.jpg'}
-            }
+            // {
+            //     key: '1',
+            //     label: 'Acetaminofen',
+            //     value: 'acetaminofen',
+            //     image: {uri: 'https://encolombia.com/wp-content/uploads/2014/04/acetaminofen-urg-1.jpg'}
+            // },
+            // {
+            //     key: '2',
+            //     label: 'Advil',
+            //     value: 'advil',
+            //     image: {uri: 'https://www.chedraui.com.mx/medias/750110876752-00-CH515Wx515H?context=bWFzdGVyfHJvb3R8MTEyMDMyfGltYWdlL2pwZWd8aDJiL2g2Yi85NDAxOTI0NjE2MjIyLmpwZ3wxZjFiNDMxNjFhMTRmMWRhNWE3OGZmMTMyMjQ4NTY2N2MxOWVlMmI3YTZkN2NmMDJhZWVlYzYwMzhjNzU0NThi'}
+            // },
+            // {
+            //     key: '3',
+            //     label: 'Ciprofloxacina',
+            //     value: 'ciprofloxacina',
+            //     image: {uri: 'https://sh-sci.org/wp-content/uploads/ciprofloxacino-para-que-sirve-como-se-toma-posologia-efectos-secundarios-precio.jpg'}
+            // }
         ],
         category: 'roberto'
 
