@@ -2,9 +2,8 @@ import { StyleSheet } from 'react-native';
 import { FONT_SIZE } from './../../../constants/constants';
 export default StyleSheet.create({
     squareInput: {
-
-        paddingTop: 17,
-        paddingBottom: 17,
+        paddingTop: 14,
+        paddingBottom: 14,
         paddingLeft: 13,
         width: '100%',
         paddingRight: 13,

@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './CheckPnD.styles';
 import SquareInput from '../../components/UI/SquareInput/SquareInput';
 import { COLOR_SECONDARY } from '../../constants/constants';
+import IconList from '../../components/IconList/IconList';
 
 class CheckPnD extends Component {
 
@@ -21,16 +22,22 @@ class CheckPnD extends Component {
     state = {
         categories: [
             {
-                label: 'Roberto',
-                value: 'roberto',
+                key: '1',
+                label: 'Acetaminofen',
+                value: 'acetaminofen',
+                image: {uri: 'https://encolombia.com/wp-content/uploads/2014/04/acetaminofen-urg-1.jpg'}
             },
             {
-                label: 'Tommy',
-                value: 'tommy',
+                key: '2',
+                label: 'Advil',
+                value: 'advil',
+                image: {uri: 'https://www.chedraui.com.mx/medias/750110876752-00-CH515Wx515H?context=bWFzdGVyfHJvb3R8MTEyMDMyfGltYWdlL2pwZWd8aDJiL2g2Yi85NDAxOTI0NjE2MjIyLmpwZ3wxZjFiNDMxNjFhMTRmMWRhNWE3OGZmMTMyMjQ4NTY2N2MxOWVlMmI3YTZkN2NmMDJhZWVlYzYwMzhjNzU0NThi'}
             },
             {
-                label: 'Mama',
-                value: 'mama',
+                key: '3',
+                label: 'Ciprofloxacina',
+                value: 'ciprofloxacina',
+                image: {uri: 'https://sh-sci.org/wp-content/uploads/ciprofloxacino-para-que-sirve-como-se-toma-posologia-efectos-secundarios-precio.jpg'}
             }
         ],
         category: 'roberto'
@@ -72,6 +79,7 @@ class CheckPnD extends Component {
                             </TouchableWithoutFeedback>
                             <Text style={styles.headerTitle}>Pastillas</Text>
                         </View>
+
                         <View style={styles.row}>
                             <SquareInput />
                         </View>
@@ -94,9 +102,7 @@ class CheckPnD extends Component {
                             </View>
                         </View>
                         <ScrollView>
-                            {this.state.categories.map((category, index) => {
-                                return <Text key={index}>{category.label}</Text>
-                            })}
+                            <IconList listData={this.state.categories} />
                         </ScrollView>
                     </View>
                 </SafeAreaView>
