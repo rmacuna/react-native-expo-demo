@@ -7,13 +7,13 @@ import {
     ScrollView,
     Platform,
     TouchableWithoutFeedback,
+    ActionSheetIOS,
     StatusBar
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './CheckPnD.styles';
 import SquareInput from '../../components/UI/SquareInput/SquareInput';
 import { COLOR_SECONDARY } from '../../constants/constants';
-import RNPickerSelect from 'react-native-picker-select';
 
 class CheckPnD extends Component {
 
@@ -32,7 +32,8 @@ class CheckPnD extends Component {
                 label: 'Mama',
                 value: 'mama',
             }
-        ]
+        ],
+        category: 'roberto'
 
     }
 
@@ -40,13 +41,19 @@ class CheckPnD extends Component {
         this.props.navigation.goBack();
     }
 
-    render() {
+    _onPickerValueChange = (itemValue, itemIndex) => {
+        // Creo una copia del array para no mutar el estado.
+        const arrayCopy = [...this.state.categories];
 
-        const placeholder = {
-            label: this.state.categories[0].value,
-            value: null,
-            color: '#9EA0A4',
-        };
+        const indexOfItemFounded = arrayCopy.findIndex((element, index) => {
+            return index === itemIndex && element.value === itemValue
+        });
+
+        this.setState({
+            category: arrayCopy[indexOfItemFounded].value
+        });
+    }
+    render() {
 
         return (
             <View style={styles.container}>
@@ -71,46 +78,25 @@ class CheckPnD extends Component {
                         <View style={[styles.row, { justifyContent: 'space-between', marginTop: 40 }]}>
                             <View>
                                 <Text style={styles.title}>Todas</Text>
-                                <Text style={styles.subtitle} >de Roberto</Text>
+                                <Text style={styles.subtitle} >de {this.state.category}</Text>
                             </View>
                             <View>
-                                <RNPickerSelect
-                                    placeholder={placeholder}
-                                    items={this.state.categories}
-                                    onValueChange={value => {
-                                        this.setState({
-                                            categories: [
-                                                {
-                                                    label: 'Roberto',
-                                                    value: 'roberto',
-                                                },
-                                                {
-                                                    label: 'Tommy',
-                                                    value: 'tommy',
-                                                },
-                                                {
-                                                    label: 'Mama',
-                                                    value: 'mama',
-                                                }
-                                            ],
-                                        });
-                                    }}
-                                    // onUpArrow={() => {
-                                    //     this.inputRefs.firstTextInput.focus();
-                                    // }}
-                                    // onDownArrow={() => {
-                                    //     this.inputRefs.favSport1.togglePicker();
-                                    // }}
-                                    // style={pickerSelectStyles}
-                                    value={this.state.categories[0].value}
-                                // ref={el => {
-                                //     this.inputRefs.favSport0 = el;
-                                // }}
-                                />
+                                {/* <Picker
+                                    selectedValue={this.state.category}
+                                    style={{ height: 30, width: 110 }}
+                                    onValueChange={(itemValue, itemIndex) => this._onPickerValueChange(itemValue, itemIndex)}>
+                                    {
+                                        this.state.categories.map((category, index) => {
+                                            return <Picker.Item key={index} label={category.label} value={category.value} />
+                                        })
+                                    }
+                                </Picker> */}
                             </View>
                         </View>
                         <ScrollView>
-
+                            {this.state.categories.map((category, index) => {
+                                return <Text key={index}>{category.label}</Text>
+                            })}
                         </ScrollView>
                     </View>
                 </SafeAreaView>
