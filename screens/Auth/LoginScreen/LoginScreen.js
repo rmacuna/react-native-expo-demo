@@ -33,7 +33,7 @@ class LoginScreen extends Component {
     }
 
     _onClickHandler = () => {
-        alert('Pressed')
+        this.props.navigation.navigate('App')
     }
 
     _onInputChangeHandler = (value, key) => {

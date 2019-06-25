@@ -4,11 +4,13 @@ import {
     View,
     StyleSheet,
     Image,
+    StatusBar,
     ImageBackground
 } from 'react-native'
 import CustomInput from '../../../components/UI/CustomInput/CustomInput';
 import Pillbutton from '../../../components/UI/Pillbutton/Pillbutton';
 import styles from './RegisterScreen.styles';
+import { COLOR_SECONDARY } from './../../../constants/constants';
 
 export default class RegisterScreen extends Component {
 
@@ -57,10 +59,13 @@ export default class RegisterScreen extends Component {
 
     render() {
         return (
-            <ImageBackground
-                style={{ width: '100%', height: '100%'}}
-                source={require('./../../../assets/images/background_waves.png')}>
 
+            <ImageBackground
+                style={{ width: '100%', height: '100%' }}
+                source={require('./../../../assets/images/background_waves.png')}>
+                <StatusBar
+                    barStyle="light-content"
+                    backgroundColor={COLOR_SECONDARY} />
                 {/* Primera sección */}
                 <View style={styles.ImageAndTitleWrapper}>
                     <Text style={styles.title}>Crear una cuenta</Text>
@@ -122,7 +127,7 @@ export default class RegisterScreen extends Component {
                         backgroundColor="#fff"
                         onPress={this._registerHandler}>
                         Registrarse
-                    </Pillbutton> 
+                    </Pillbutton>
                 </View>
 
 
