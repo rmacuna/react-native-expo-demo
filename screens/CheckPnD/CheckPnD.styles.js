@@ -35,6 +35,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     card: {
+        position: 'relative',
         marginTop: Platform.OS === "android" ? 30 : 0,
         width: cardWidth,
         height: cardHeight,

@@ -15,11 +15,15 @@ import styles from './CheckPnD.styles';
 import SquareInput from '../../components/UI/SquareInput/SquareInput';
 import { COLOR_SECONDARY } from '../../constants/constants';
 import IconList from '../../components/IconList/IconList';
+import Header from '../../components/Check/Header/Header';
 
 class CheckPnD extends Component {
 
 
     state = {
+        inputSearch: {
+          value: ""  
+        },
         categories: [
             // {
             //     key: '1',
@@ -36,6 +40,14 @@ class CheckPnD extends Component {
         this.props.navigation.goBack();
     }
 
+    _onSearchTextChangeHandler = (value) => {
+        this.setState({
+            inputSearch: {
+                value: value
+            }
+        })
+    }
+
     _onPickerValueChange = (itemValue, itemIndex) => {
         // Creo una copia del array para no mutar el estado.
         const arrayCopy = [...this.state.categories];
@@ -49,7 +61,6 @@ class CheckPnD extends Component {
         });
     }
     render() {
-
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -58,19 +69,15 @@ class CheckPnD extends Component {
                 <SafeAreaView style={styles.centerItems}>
                     <View style={styles.card}>
                         <View style={styles.row}>
-                            <TouchableWithoutFeedback onPress={this._onBackButtonPress}>
-                                <Ionicons
-                                    size={24}
-                                    name={Platform.OS === "android" ?
-                                        "md-arrow-back" : "ios-arrow-back"}
-                                />
-                            </TouchableWithoutFeedback>
-                            <Text style={styles.headerTitle}>Pastillas</Text>
+                            <Header onBackPress={this._onBackButtonPress} headerTitle="Pastillas"/>
+                        </View>
+                        <View style={styles.row}>
+                            <SquareInput 
+                                value={this.state.inputSearch.value}
+                                onChangeText={this._onSearchTextChangeHandler.bind(this)}
+                            />
                         </View>
 
-                        <View style={styles.row}>
-                            <SquareInput />
-                        </View>
                         <View style={[styles.row, { justifyContent: 'space-between', marginTop: 40 }]}>
                             <View>
                                 <Text style={styles.title}>Todas</Text>
