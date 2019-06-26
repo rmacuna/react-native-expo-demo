@@ -25,15 +25,19 @@ const CategorySlider = (props) => {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Citas</Text>
-                    <View style={{ width: '100%', paddingTop: 10, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image
-                            style={{ width: 75, height: 75 }}
-                            source={require('./../../../assets/images/calendar.png')}
-                        />
+
+                <TouchableWithoutFeedback onPress={props.datePress}>
+                    <View style={styles.card}>
+                        <Text style={styles.cardTitle}>Citas</Text>
+                        <View style={{ width: '100%', paddingTop: 10, justifyContent: 'center', alignItems: 'center' }}>
+                            <Image
+                                style={{ width: 75, height: 75 }}
+                                source={require('./../../../assets/images/calendar.png')}
+                            />
+                        </View>
                     </View>
-                </View>
+                </TouchableWithoutFeedback>
+
             </View>
         </View>
 

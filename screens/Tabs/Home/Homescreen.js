@@ -25,15 +25,13 @@ class Homescreen extends Component {
 
 
     componentDidMount() {
-        Animated.parallel([
-            Animated.spring()
-        ])
+        // Animated.parallel([
+        //     Animated.spring()
+        // ])
     }
 
     _onCardPress = type => {
-        if (type === 0) {
-            this.props.navigation.navigate('CheckPnD')
-        }
+        this.props.navigation.navigate('CheckPnD', { type: type })
     }
 
     _onPressButtonHandler = () => {

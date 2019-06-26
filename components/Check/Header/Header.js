@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
+        height: '100%',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start'
@@ -17,8 +18,17 @@ const styles = StyleSheet.create({
     item: {
         flex: .1
     },
+    floatIcon: {
+        position: 'absolute',
+        left: 0,
+        zIndex: 10,
+        paddingTop: 2,
+        width: 30,
+        height: 30
+    },
     title: {
-        flex: .9,
+        flex: 1,
+        alignItems: 'center',
         textAlign: 'center',
         fontFamily: 'GorditaBold',
         fontSize: FONT_SIZE.xlarge
@@ -32,10 +42,10 @@ const Header = (props) => {
         <View style={styles.headerTitle}>
             <Ionicons
                 onPress={props.onBackPress}
-                style={styles.item}
+                style={styles.floatIcon}
                 size={ICON_SIZES.huge}
                 name={Platform.OS === "android" ? "md-arrow-back" : "ios-arrow-back"} />
-            <Text style={[styles.item, styles.title]}>{props.headerTitle}</Text>
+            <Text style={styles.title}>{props.headerTitle}</Text>
         </View>
     )
 }

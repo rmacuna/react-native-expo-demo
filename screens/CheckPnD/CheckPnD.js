@@ -19,10 +19,11 @@ import Header from '../../components/Check/Header/Header';
 
 class CheckPnD extends Component {
 
+    // Atributo de la clase para saber que tipo de titulo desplegar
 
     state = {
         inputSearch: {
-          value: ""  
+            value: ""
         },
         categories: [
             // {
@@ -61,6 +62,8 @@ class CheckPnD extends Component {
         });
     }
     render() {
+        const { navigation } = this.props;
+        const type = navigation.getParam('type');
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -69,10 +72,12 @@ class CheckPnD extends Component {
                 <SafeAreaView style={styles.centerItems}>
                     <View style={styles.card}>
                         <View style={styles.row}>
-                            <Header onBackPress={this._onBackButtonPress} headerTitle="Pastillas"/>
+                            <Header
+                                headerTitle={type === 0 ? "Pastillas" : "Citas"}
+                                onBackPress={this._onBackButtonPress} />
                         </View>
                         <View style={styles.row}>
-                            <SquareInput 
+                            <SquareInput
                                 value={this.state.inputSearch.value}
                                 onChangeText={this._onSearchTextChangeHandler.bind(this)}
                             />
@@ -100,10 +105,10 @@ class CheckPnD extends Component {
                             <IconList listData={this.state.categories} />
                         </ScrollView>
                         <View style={styles.footer}>
-                            <TouchableOpacity style={{flex: 1}}>
+                            <TouchableOpacity style={{ flex: 1 }}>
                                 <Text style={styles.footerButton}>Aplicar Filtro</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{flex: 1}}>
+                            <TouchableOpacity style={{ flex: 1 }}>
                                 <Text style={styles.footerButton}>Añadir</Text>
                             </TouchableOpacity>
                         </View>
