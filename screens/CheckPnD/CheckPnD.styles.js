@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native'
-import { COLOR_PRIMARY, FONT_SIZE, COLOR_SECONDARY } from './../../constants/constants';
+import { COLOR_PRIMARY, FONT_SIZE, COLOR_SECONDARY, COLOR_DARK } from './../../constants/constants';
 
 
 let cardWidth = '98%';
@@ -49,5 +49,24 @@ export default StyleSheet.create({
     subtitle: {
         fontFamily: 'GorditaMedium',
         fontSize: FONT_SIZE.large
+    },
+    listWrapper: {
+        flex: 11
+    },
+    footer: {
+        position: 'absolute',
+        zIndex: 10,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        flexDirection: 'row', 
+        padding: 25
+    },
+    footerButton: {
+        flex: 1,
+        fontFamily: 'GorditaMedium',
+        textAlign: 'center',
+        fontSize: FONT_SIZE.large,
+        color: COLOR_DARK
     }
 })
