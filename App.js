@@ -77,32 +77,15 @@ const CheckStack = createStackNavigator(
   },
   {
     transitionConfig: () => ({
+      transitionSpec: {
+        duration: 300,
+        useNativeDriver: true,
+      },
       screenInterpolator: (props) => {
         return fade(props)
       }
     })
   }
-  // {
-  //   transitionConfig: () => {
-  //     return {
-  //       transitionSpec: {
-  //         duration: 400,
-  //         easing: Easing.in,
-  //         timing: Animated.timing,
-  //         useNativeDriver: true
-  //       },
-  //       screenInterpolator: (sceneProps) => {
-  //         // const witdh = layout.initWidth;
-  //         // const { index, route } = scene;
-  //         // const params = route.params || {}; // <- That's new
-  //         // const transition = params.transition || 'default'; // <- That's new
-  //         return {
-  //           fade: fade(sceneProps)
-  //         };
-  //       }
-  //     }
-  //   }
-  // }
 )
 
 const AppStack = createBottomTabNavigator({

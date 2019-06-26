@@ -6,13 +6,21 @@ import styles from './SquareInput.styles';
 const SquareInput = (props) => {
     return (
         <View style={styles.rowContainer}>
-            <Ionicons 
-                size={20} 
-                color="#B6B6B6"
-                name="md-search" />
-            <TextInput {...props} style={styles.squareInput} placeholder="Buscar" />
+            {props.icon ?
+                <Ionicons
+                    size={20}
+                    color="#B6B6B6"
+                    name="md-search" /> : null
+            }
+
+            <TextInput {...props} style={styles.squareInput} />
         </View>
     )
+}
+
+SquareInput.defaultProps = {
+    icon: true,
+    placeholder: "Buscar"
 }
 
 export default SquareInput
