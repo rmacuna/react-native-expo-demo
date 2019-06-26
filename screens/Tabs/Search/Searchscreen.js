@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, Platform, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-navigation';
-import { COLOR_PRIMARY, COLOR_DARK, COLOR_DARK_PLACEHOLDER } from '../../../constants/constants';
-import { TextInput } from 'react-native-gesture-handler';
+import {
+    Text,
+    View,
+    Platform, 
+    StyleSheet, 
+    Keyboard, 
+    TextInput, 
+    SafeAreaView,
+    TouchableWithoutFeedback
+} from 'react-native';
+import { COLOR_PRIMARY, COLOR_DARK, COLOR_DARK_PLACEHOLDER, COLOR_SECONDARY, COLOR_LIGHT } from '../../../constants/constants';
 import NavyButton from './../../../components/UI/NavyButton/NavyButton';
 
 
@@ -57,18 +64,21 @@ export default class Searchscreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text>{this.state.controls.input.value}</Text>
-                <TextInput
-                    style={styles.inputSearch}
-                    placeholderTextColor={COLOR_DARK_PLACEHOLDER}
-                    onBlur={this._onBlurHandler}
-                    onFocus={this._onFocusHandler}
-                    onChangeText={(value) => this._onInputChangeHandler(value)}
-                    value={this.state.controls.input.value}
-                    placeholder={this.state.controls.input.placeholder} />
-                <NavyButton style={styles.buttonBottom} >Resultados de la busqueda</NavyButton>
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.container}>
+                    <Text style={styles.superPlaceholder}>{this.state.controls.input.value}</Text>
+                    <TextInput
+                        style={styles.inputSearch}
+                        placeholderTextColor="rgba(255,255,255,.5)"
+                        onBlur={this._onBlurHandler}
+                        onFocus={this._onFocusHandler}
+                        onChangeText={(value) => this._onInputChangeHandler(value)}
+                        value={this.state.controls.input.value}
+                        placeholder={this.state.controls.input.placeholder} />
+                    <NavyButton style={styles.buttonBottom} >Resultados de la busqueda</NavyButton>
+                </View>
+            </TouchableWithoutFeedback>
+
         )
     }
 }
@@ -78,8 +88,8 @@ export default class Searchscreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR_PRIMARY,
-        padding: 25,
+        backgroundColor: COLOR_SECONDARY,
+        padding: 15,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -87,9 +97,14 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 25
     },
+    superPlaceholder: {
+        fontFamily: 'GorditaRegular',
+        color: COLOR_LIGHT
+    },
     inputSearch: {
         width: '80%',
         textAlign: 'center',
+        color: COLOR_LIGHT,
         fontFamily: 'GorditaMedium',
         fontSize: 45,
         height: 100,
