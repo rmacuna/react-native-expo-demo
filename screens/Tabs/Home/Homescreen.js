@@ -29,7 +29,12 @@ class Homescreen extends Component {
         this.props.navigation.navigate('CheckPnD', { type: type })
     }
 
-
+    _onModalDismiss = () => {
+        this.setState({
+            showModalAction: false,
+            currentAction: '',
+        })
+    }
     _onPressItem = type => {
         switch (type) {
             case 0:
@@ -92,6 +97,7 @@ class Homescreen extends Component {
                 </ImageBackground>
 
                 <ModalAction
+                    modalClose={this._onModalDismiss}
                     headerTitle={this.state.currentAction}
                     type={this.state.modalAction}
                     active={this.state.showModalAction}

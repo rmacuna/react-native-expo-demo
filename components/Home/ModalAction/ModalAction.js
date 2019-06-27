@@ -5,14 +5,17 @@ import {
     Modal,
     SafeAreaView,
     StatusBar,
+    TouchableOpacity,
     ScrollView
 } from 'react-native'
 import {
     STATUSBAR_PRIMARY_COLOR,
     COLOR_SECONDARY,
-    COLOR_EMPHASIS
+    COLOR_EMPHASIS,
+    COLOR_PRIMARY
 } from './../../../constants/constants';
 
+import { formatToReadableDate } from './../../../utils/date';
 import SquareInput from './../../UI/SquareInput/SquareInput';
 import NavyButton from './../../UI/NavyButton/NavyButton';
 import DateTimePicker from "react-native-modal-datetime-picker";
@@ -48,95 +51,23 @@ class ModalAction extends Component {
     };
 
     _handleDatePicked = (date) => {
+
+        let readableDate = formatToReadableDate(date)
+
         if (this.state.currentDateInput === 0) {
             this.setState({
-                initialDate: date.toString()
+                initialDate: readableDate
             })
         } else if (this.state.currentDateInput === 1) {
             this.setState({
-                finalDate: date.toString()
+                finalDate: readableDate
             })
         }
 
         this._hideDateTimePicker()
     };
 
-    //     switch(props.type) {
-    //         case 0:
-    //         modalContent = (
-    //             <View>
-    //                 <SquareInput
-    //                     onChangeText={props.pillNameChange}
-    //                     value={props.pillName}
-    //                     placeholder="Nombre"
-    //                     icon={false}
-    //                 />
-    //                 <SquareInput
-    //                     onChangeText={props.pillQuantityChange}
-    //                     value={props.pillQuantity}
-    //                     placeholder="Cantidad"
-    //                     icon={false}
-    //                 />
-    //                 <Text style={styles.hint}>
-    //                     Ingresa palabras que identifiquen el dato a agregar, cosas con las que puedas relacionarlas.
-    //                     </Text>
-    //                 <SquareInput
-    //                     onChangeText={props.keywordsChange}
-    //                     value={props.keywords}
-    //                     placeholder="Palabras clave"
-    //                     icon={false}
-    //                 />
-    //                 <Text style={styles.subtitle}>Frecuencia</Text>
-    //                 <View style={{ flexDirection: 'row' }}>
-    //                     <View style={{ flex: .7 }}>
-    //                         <NavyButton
-    //                             onPress={_showDateTimePicker}
-    //                             style={{ borderRadius: 6, marginRight: 5 }}
-    //                             color="#fff"
-    //                             backgroundColor={COLOR_SECONDARY}>Fecha Inicio</NavyButton>
-    //                     </View>
-    //                     <View style={styles.center}>
-    //                         <Text>Escoge una fecha inicial</Text>
-    //                     </View>
-    //                 </View>
-    //                 <View style={{ flexDirection: 'row' }}>
-    //                     <View style={{ flex: .7 }}>
-    //                         <NavyButton
-    //                             style={{ borderRadius: 6, marginRight: 5 }}
-    //                             color="#fff"
-    //                             backgroundColor={COLOR_EMPHASIS}>Fecha Fin</NavyButton>
-    //                     </View>
-    //                     <View style={styles.center}>
-    //                         <Text>Escoge una fecha final</Text>
-    //                     </View>
-    //                 </View>
-    //                 <Text style={styles.hint}>
-    //                     Ingresa cada cuantas horas quieres que te recuerde el medicamento
-    //                     </Text>
-    //                 <SquareInput
-    //                     onChangeText={props.hoursFrequencyChange}
-    //                     value={props.hoursFrequency}
-    //                     placeholder="Frecuencia en horas"
-    //                     icon={false}
-    //                 />
-    //             </View>
-    //         )
-    //         break;
-    //         case 1:
-    //         modalContent = (
-    //             <Text>
-    //                 Hola Yo añadire una cita
-    //                 </Text>
-    //         )
-    //         break;
-    //         case 2:
-    //         modalContent = (
-    //             <Text>Hola yo añadire una categoria</Text>
-    //         )
-    //         break;
-    //         default:
-    //         return null
-    // }
+    
 
     render() {
 
@@ -183,7 +114,7 @@ class ModalAction extends Component {
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flex: .7 }}>
                             <NavyButton
-                                onPress={() =>this._showDateTimePicker(1)}
+                                onPress={() => this._showDateTimePicker(1)}
                                 style={{ borderRadius: 6, marginRight: 5 }}
                                 color="#fff"
                                 backgroundColor={COLOR_EMPHASIS}>Fecha Fin</NavyButton>
@@ -201,6 +132,18 @@ class ModalAction extends Component {
                         placeholder="Frecuencia en horas"
                         icon={false}
                     />
+                    <Text style={styles.subtitle}>Multimedia</Text>
+                    <NavyButton backgroundColor={COLOR_PRIMARY}>Cargar Imagen</NavyButton>
+                    <View style={styles.separador}></View>
+                    <View style={styles.row}>
+                        <TouchableOpacity style={{flex: 1}}>
+                            <Text style={styles.textButton}>Añadir</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{flex: 1}} onPress={this.props.modalClose}>
+                            <Text style={[styles.textButton, {color: COLOR_EMPHASIS}]}>Cerrar</Text>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
             )
         }
@@ -221,7 +164,6 @@ class ModalAction extends Component {
                             <ScrollView>
                                 {modalContent}
                             </ScrollView>
-
                         </View>
                     </View>
                 </SafeAreaView>

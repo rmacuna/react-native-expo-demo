@@ -5,6 +5,7 @@ import {
     COLOR_DARK_PLACEHOLDER,
     FONT_SIZE,
     COLOR_DARK,
+    COLOR_LINK,
 } from './../../../constants/constants'
 
 export default StyleSheet.create({
@@ -62,5 +63,21 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    separador: {
+        paddingTop: '20%',
+        paddingBottom: '10%'
+    },
+    textButton: {
+        fontSize: FONT_SIZE.large,
+        textAlign: 'center',
+        color: COLOR_LINK,
+        fontFamily: 'GorditaMedium',
+        paddingBottom: 30
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
     }
 })
