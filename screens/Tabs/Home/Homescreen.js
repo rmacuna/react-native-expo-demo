@@ -12,10 +12,9 @@ import styles from './Homescreen.styles';
 import Header from '../../../components/Home/Header/Header';
 import Additems from '../../../components/Home/AddItems/Additems';
 import { COLOR_SECONDARY } from './../../../constants/constants'
-import ModalAction from '../../../components/UI/ModalAction/ModalAction';
+import ModalAction from './../../../components/Home/ModalAction/ModalAction';
+
 class Homescreen extends Component {
-
-
     state = {
         showModalAction: false,
         currentAction: '',

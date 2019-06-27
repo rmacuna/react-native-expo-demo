@@ -1,4 +1,3 @@
-
 import { StyleSheet, StatusBar } from 'react-native'
 
 import {
@@ -6,7 +5,7 @@ import {
     COLOR_DARK_PLACEHOLDER,
     FONT_SIZE,
     COLOR_DARK,
-} from './../../../constants/constants.js'
+} from './../../../constants/constants'
 
 export default StyleSheet.create({
     container: {
