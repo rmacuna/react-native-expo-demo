@@ -27,14 +27,16 @@ class ModalAction extends Component {
     state = {
         isDateTimePickerVisible: false,
         initialDate: 'Escoge una fecha inicial',
-        finalDate: 'Escoge una fecha final'
+        finalDate: 'Escoge una fecha final',
+        currentDateInput: null
     }
 
 
     // Usar el datetime picker
-    _showDateTimePicker = () => {
+    _showDateTimePicker = (value) => {
         this.setState({
-            isDateTimePickerVisible: true
+            isDateTimePickerVisible: true,
+            currentDateInput: value
         });
     };
 
@@ -45,10 +47,17 @@ class ModalAction extends Component {
         })
     };
 
-    _handleDatePicked = date => {
-        this.setState({
-            initialDate: date
-        })
+    _handleDatePicked = (date) => {
+        if (this.state.currentDateInput === 0) {
+            this.setState({
+                initialDate: date.toString()
+            })
+        } else if (this.state.currentDateInput === 1) {
+            this.setState({
+                finalDate: date.toString()
+            })
+        }
+
         this._hideDateTimePicker()
     };
 
@@ -162,7 +171,7 @@ class ModalAction extends Component {
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flex: .7 }}>
                             <NavyButton
-                                onPress={this._showDateTimePicker}
+                                onPress={() => this._showDateTimePicker(0)}
                                 style={{ borderRadius: 6, marginRight: 5 }}
                                 color="#fff"
                                 backgroundColor={COLOR_SECONDARY}>Fecha Inicio</NavyButton>
@@ -174,6 +183,7 @@ class ModalAction extends Component {
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flex: .7 }}>
                             <NavyButton
+                                onPress={() =>this._showDateTimePicker(1)}
                                 style={{ borderRadius: 6, marginRight: 5 }}
                                 color="#fff"
                                 backgroundColor={COLOR_EMPHASIS}>Fecha Fin</NavyButton>
