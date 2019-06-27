@@ -67,7 +67,7 @@ class ModalAction extends Component {
         this._hideDateTimePicker()
     };
 
-    
+
 
     render() {
 
@@ -134,15 +134,7 @@ class ModalAction extends Component {
                     />
                     <Text style={styles.subtitle}>Multimedia</Text>
                     <NavyButton backgroundColor={COLOR_PRIMARY}>Cargar Imagen</NavyButton>
-                    <View style={styles.separador}></View>
-                    <View style={styles.row}>
-                        <TouchableOpacity style={{flex: 1}}>
-                            <Text style={styles.textButton}>Añadir</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{flex: 1}} onPress={this.props.modalClose}>
-                            <Text style={[styles.textButton, {color: COLOR_EMPHASIS}]}>Cerrar</Text>
-                        </TouchableOpacity>
-                    </View>
+
 
                 </View>
             )
@@ -163,6 +155,15 @@ class ModalAction extends Component {
                             </View>
                             <ScrollView>
                                 {modalContent}
+                                <View style={styles.separador}></View>
+                                <View style={styles.row}>
+                                    <TouchableOpacity style={{ flex: 1 }}>
+                                        <Text style={styles.textButton}>Añadir</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ flex: 1 }} onPress={this.props.modalClose}>
+                                        <Text style={[styles.textButton, { color: COLOR_EMPHASIS }]}>Cerrar</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </ScrollView>
                         </View>
                     </View>

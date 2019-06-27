@@ -50,12 +50,16 @@ class Homescreen extends Component {
                     currentAction: 'Añadir cita',
                     showModalAction: true
                 });
+                break;
             case 2:
                 this.setState({
                     modalAction: 2,
                     currentAction: 'Añadir categoria',
                     showModalAction: true
                 });
+                break;
+            default: 
+                return 
         }
     }
 
