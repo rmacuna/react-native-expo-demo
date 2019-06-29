@@ -10,17 +10,17 @@ import {
 } from 'react-native'
 import {
     STATUSBAR_PRIMARY_COLOR,
-    COLOR_SECONDARY,
     COLOR_EMPHASIS,
-    COLOR_PRIMARY
-} from './../../../constants/constants';
+} from './../../../constants/constants'
 
-import { formatToReadableDate } from './../../../utils/date';
-import SquareInput from './../../UI/SquareInput/SquareInput';
-import NavyButton from './../../UI/NavyButton/NavyButton';
-import DateTimePicker from "react-native-modal-datetime-picker";
-
+import { formatToReadableDate } from './../../../utils/date'
+import DateTimePicker from "react-native-modal-datetime-picker"
+import FormDate from './FormDate/FormDate'
+import FormCategory from './FormCategory/FormCategory'
+import FormPill from './FormPill/FormPill'
 import styles from './ModalAction.styles'
+
+
 
 
 
@@ -28,45 +28,94 @@ class ModalAction extends Component {
 
 
     state = {
-        isDateTimePickerVisible: false,
+        startDateTimePickerVisible: false,
+        endDateTimePickerVisible: false,
         initialDate: 'Escoge una fecha inicial',
         finalDate: 'Escoge una fecha final',
-        currentDateInput: null
+        currentDateInput: null,
+
+        controls: {
+            pillInput: {
+                value: "",
+                valid: true,
+            },
+            quantityInput: {
+                value: "",
+                valid: true
+            },
+            keywordsInput: {
+                value: "",
+                valid: true
+            },
+            frequencyInput: {
+                value: "",
+                valid: true
+            }
+        }
     }
 
 
-    // Usar el datetime picker
-    _showDateTimePicker = (value) => {
+    // Usar el datetime picker para la fecha inicial.
+    _showStartDateTimePicker = (value) => {
         this.setState({
-            isDateTimePickerVisible: true,
+            startDateTimePickerVisible: true,
             currentDateInput: value
         });
     };
 
-    // Esconder el datetime picker
-    _hideDateTimePicker = () => {
+    // Usar el datetime picker para la fecha final
+
+    _showEndDateTimePicker = (value) => {
         this.setState({
-            isDateTimePickerVisible: false
+            endDateTimePickerVisible: false,
+            currentDateInput: value
+        })
+    }
+
+    // Esconder el datetime picker
+    _hideStartDateTimePicker = () => {
+        this.setState({
+            startDateTimePickerVisible: false
         })
     };
 
-    _handleDatePicked = (date) => {
+    _hideEndDateTimePicker = () => {
+        this.setState({
+            endDateTimePickerVisible: false
+        })
+    }
 
+    _handleStartDatePicker = (date) => {
         let readableDate = formatToReadableDate(date)
-
-        if (this.state.currentDateInput === 0) {
-            this.setState({
-                initialDate: readableDate
-            })
-        } else if (this.state.currentDateInput === 1) {
-            this.setState({
-                finalDate: readableDate
-            })
-        }
-
-        this._hideDateTimePicker()
+        this.setState({
+            initialDate: readableDate
+        })
+        this._hideStartDateTimePicker();
     };
 
+    _handleEndDatePicker = (date) => {
+        let readableDate = formatToReadableDate(date)
+        this.setState({
+            finalDate: readableDate
+        })
+        this._hideEndDateTimePicker();
+    }
+
+
+
+
+
+    _inputChangeHandler = (value, key) => {
+        this.setState({
+            controls: {
+                ...this.state.controls,
+                [key]: {
+                    ...this.state.controls[key],
+                    value: value
+                }
+            }
+        })
+    }
 
 
     render() {
@@ -76,67 +125,31 @@ class ModalAction extends Component {
 
         if (this.props.type === 0) {
             modalContent = (
-                <View>
-                    <SquareInput
-                        onChangeText={this.props.pillNameChange}
-                        value={this.props.pillName}
-                        placeholder="Nombre"
-                        icon={false}
-                    />
-                    <SquareInput
-                        onChangeText={this.props.pillQuantityChange}
-                        value={this.props.pillQuantity}
-                        placeholder="Cantidad"
-                        icon={false}
-                    />
-                    <Text style={styles.hint}>
-                        Ingresa palabras que identifiquen el dato a agregar, cosas con las que puedas relacionarlas.
-                                    </Text>
-                    <SquareInput
-                        onChangeText={this.props.keywordsChange}
-                        value={this.props.keywords}
-                        placeholder="Palabras clave"
-                        icon={false}
-                    />
-                    <Text style={styles.subtitle}>Frecuencia</Text>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flex: .7 }}>
-                            <NavyButton
-                                onPress={() => this._showDateTimePicker(0)}
-                                style={{ borderRadius: 6, marginRight: 5 }}
-                                color="#fff"
-                                backgroundColor={COLOR_SECONDARY}>Fecha Inicio</NavyButton>
-                        </View>
-                        <View style={styles.center}>
-                            <Text>{this.state.initialDate}</Text>
-                        </View>
-                    </View>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flex: .7 }}>
-                            <NavyButton
-                                onPress={() => this._showDateTimePicker(1)}
-                                style={{ borderRadius: 6, marginRight: 5 }}
-                                color="#fff"
-                                backgroundColor={COLOR_EMPHASIS}>Fecha Fin</NavyButton>
-                        </View>
-                        <View style={styles.center}>
-                            <Text>{this.state.finalDate}</Text>
-                        </View>
-                    </View>
-                    <Text style={styles.hint}>
-                        Ingresa cada cuantas horas quieres que te recuerde el medicamento
-                                    </Text>
-                    <SquareInput
-                        onChangeText={this.props.hoursFrequencyChange}
-                        value={this.props.hoursFrequency}
-                        placeholder="Frecuencia en horas"
-                        icon={false}
-                    />
-                    <Text style={styles.subtitle}>Multimedia</Text>
-                    <NavyButton backgroundColor={COLOR_PRIMARY}>Cargar Imagen</NavyButton>
+                <FormPill
+                    pillNameChange={(value) => this._inputChangeHandler(value, 'pillInput')}
+                    pillQuantityChange={(value) => this._inputChangeHandler(value, 'quantityInput')}
+                    keywordsChange={(value) => this._inputChangeHandler(value, 'keywordsInput')}
+                    hoursFrequencyChange={(value) => this._inputChangeHandler(value, 'frequencyInput')}
 
+                    pillName={this.state.controls.pillInput.value}
+                    pillQuantity={this.state.controls.quantityInput.value}
+                    keywords={this.state.controls.keywordsInput.value}
+                    hoursFrequency={this.state.controls.frequencyInput.value}
 
-                </View>
+                    showStartDatePicker={this._showStartDateTimePicker}
+                    showEndDatePicker={this._showEndDateTimePicker}
+
+                    initialDate={this.state.initialDate}
+                    finalDate={this.state.finalDate}
+                />
+            )
+        } else if (this.props.type === 1) {
+            modalContent = (
+                <FormDate />
+            )
+        } else {
+            modalContent = (
+                <FormCategory />
             )
         }
 
@@ -154,7 +167,9 @@ class ModalAction extends Component {
                                 <Text style={styles.modalHeader_title}>{this.props.headerTitle}</Text>
                             </View>
                             <ScrollView>
+                                {/* Renderizo el contenido del modalContent. */}
                                 {modalContent}
+
                                 <View style={styles.separador}></View>
                                 <View style={styles.row}>
                                     <TouchableOpacity style={{ flex: 1 }}>
@@ -168,10 +183,17 @@ class ModalAction extends Component {
                         </View>
                     </View>
                 </SafeAreaView>
+
+                {/* Componentes de posicionamiento absoluto */}
                 <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    onConfirm={this._handleDatePicked}
-                    onCancel={this._hideDateTimePicker}
+                    isVisible={this.state.startDateTimePickerVisible}
+                    onConfirm={this._handleStartDatePicker}
+                    onCancel={this._hideStartDateTimePicker}
+                />
+                 <DateTimePicker
+                    isVisible={this.state.endDateTimePickerVisible}
+                    onConfirm={this._handleEndDatePicker}
+                    onCancel={this._hideEndDateTimePicker}
                 />
             </Modal>
         )
