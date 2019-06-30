@@ -30,10 +30,21 @@ class ModalAction extends Component {
     state = {
         startDateTimePickerVisible: false,
         endDateTimePickerVisible: false,
-        initialDate: 'Escoge una fecha inicial',
-        finalDate: 'Escoge una fecha final',
-        currentDateInput: null,
 
+        dateControls: {
+            pillAction: {
+                initialDate: 'Escoge una fecha inicial',
+                finalDate: 'Escoge una fecha final',
+            },
+            dateAction: {
+                startDateTimePickerVisible: false,
+                startTimePickerVisible: false,
+                startDate: 'Escoge una fecha en el calendario',
+                hourDate: 'Especifica la hora en el calendario'
+            }
+        },
+
+        currentDateInput: null,
         controls: {
             pillInput: {
                 value: "",
@@ -51,10 +62,14 @@ class ModalAction extends Component {
                 value: "",
                 valid: true
             },
-            dateInput: {
+            dateNameInput: {
                 value: "",
                 valid: true
             },
+            dateReasonInput: {
+                value: "",
+                valid: true
+            }
 
         }
     }
@@ -72,7 +87,7 @@ class ModalAction extends Component {
 
     _showEndDateTimePicker = (value) => {
         this.setState({
-            endDateTimePickerVisible: false,
+            endDateTimePickerVisible: true,
             currentDateInput: value
         })
     }
@@ -93,7 +108,13 @@ class ModalAction extends Component {
     _handleStartDatePicker = (date) => {
         let readableDate = formatToReadableDate(date)
         this.setState({
-            initialDate: readableDate
+            dateControls: {
+                ...this.state.dateControls,
+                pillAction: {
+                    ...this.state.dateControls.pillAction,
+                    initialDate: readableDate
+                }
+            }
         })
         this._hideStartDateTimePicker();
     };
@@ -101,7 +122,13 @@ class ModalAction extends Component {
     _handleEndDatePicker = (date) => {
         let readableDate = formatToReadableDate(date)
         this.setState({
-            finalDate: readableDate
+            dateControls: {
+                ...this.state.dateControls,
+                pillAction: {
+                    ...this.state.dateControls.pillAction,
+                    finalDate: readableDate
+                }
+            }
         })
         this._hideEndDateTimePicker();
     }
@@ -117,6 +144,78 @@ class ModalAction extends Component {
             }
         })
     }
+
+    _handleDatePicker = (date) => {
+        let readableDate = formatToReadableDate(date)
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    ...this.state.dateControls.dateAction,
+                    startDate: readableDate
+                }
+            }
+        })
+        this._hideDatePicker()
+    }
+
+
+    _handleTimePicker = (date) => {
+        let time = date
+        alert(time);
+        this._hideTimePicker()
+    }
+
+    _showDatePicker = () => {
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    ...this.state.dateControls.dateAction,
+                    startDateTimePickerVisible: true
+                }
+            }
+        })
+    }
+
+    _showTimePicker = () => {
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    ...this.state.dateControls.dateAction,
+                    startTimePickerVisible: true
+                }
+            }
+        })
+    }
+
+    _hideTimePicker = () => {
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    ...this.state.dateControls.dateAction,
+                    startTimePickerVisible: false
+                }
+            }
+        })
+    }
+
+
+    _hideDatePicker = () => {
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    ...this.state.dateControls.dateAction,
+                    startDateTimePickerVisible: false
+                }
+            }
+        })
+    }
+
+
 
 
     render() {
@@ -140,16 +239,26 @@ class ModalAction extends Component {
                     showStartDatePicker={this._showStartDateTimePicker}
                     showEndDatePicker={this._showEndDateTimePicker}
 
-                    initialDate={this.state.initialDate}
-                    finalDate={this.state.finalDate}
+                    initialDate={this.state.dateControls.pillAction.initialDate}
+                    finalDate={this.state.dateControls.pillAction.finalDate}
                 />
             )
         } else if (this.props.type === 1) {
             modalContent = (
-                <FormDate 
-                    dateNameChange={(value) => this._inputChangeHandler(value, 'dateInput')}
-                    dateReason={this.state.controls.dateInput.value}
-                
+                <FormDate
+                    dateNameChange={(value) => this._inputChangeHandler(value, 'dateNameInput')}
+                    dateName={this.state.controls.dateNameInput.value}
+                    dateReasonChange={(value) => this._inputChangeHandler(value, 'dateReasonInput')}
+                    dateReason={this.state.controls.dateReasonInput.value}
+
+                    showDatePicker={this._showDatePicker}
+                    showHourPicker={this._showTimePicker}
+
+                    initialDate={this.state.dateControls.dateAction.startDate}
+                    startHour={this.state.dateControls.dateAction.hourDate}
+
+
+
                 />
             )
         } else {
@@ -196,11 +305,29 @@ class ModalAction extends Component {
                     onConfirm={this._handleStartDatePicker}
                     onCancel={this._hideStartDateTimePicker}
                 />
-                 <DateTimePicker
+                <DateTimePicker
                     isVisible={this.state.endDateTimePickerVisible}
                     onConfirm={this._handleEndDatePicker}
                     onCancel={this._hideEndDateTimePicker}
                 />
+
+                {/* Date time picker para el modal de citas */}
+
+                <DateTimePicker
+                    isVisible={this.state.dateControls.dateAction.startDateTimePickerVisible}
+                    onConfirm={this._handleDatePicker}
+                    onCancel={this._hideDatePicker}
+                    mode="date"
+                />
+
+                <DateTimePicker
+                    isVisible={this.state.dateControls.dateAction.startTimePickerVisible}
+                    onConfirm={this._handleTimePicker}
+                    onCancel={this._hideTimePicker}
+                    mode="time"
+                />
+
+
             </Modal>
         )
     }
