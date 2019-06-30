@@ -101,10 +101,6 @@ class ModalAction extends Component {
         this._hideEndDateTimePicker();
     }
 
-
-
-
-
     _inputChangeHandler = (value, key) => {
         this.setState({
             controls: {
@@ -117,7 +113,7 @@ class ModalAction extends Component {
         })
     }
 
-
+    
     render() {
 
         let modalContent = null;
@@ -145,7 +141,10 @@ class ModalAction extends Component {
             )
         } else if (this.props.type === 1) {
             modalContent = (
-                <FormDate />
+                <FormDate 
+
+                
+                />
             )
         } else {
             modalContent = (
