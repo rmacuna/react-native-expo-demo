@@ -21,7 +21,6 @@ const FormDate = (props) => {
                 icon={false}
             />
             <Text style={styles.subtitle}>Ajustar fecha y hora</Text>
-
             <View style={{ flexDirection: 'row' }}>
                 <View style={{ flex: .7 }}>
                     <NavyButton
@@ -31,7 +30,7 @@ const FormDate = (props) => {
                         backgroundColor={COLOR_SECONDARY}>Fecha</NavyButton>
                 </View>
                 <View style={styles.center}>
-                    <Text>{props.initialDate}</Text>
+                    <Text>{props.startDate}</Text>
                 </View>
             </View>
 

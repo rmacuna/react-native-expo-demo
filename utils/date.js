@@ -5,3 +5,8 @@ export const formatToReadableDate = (stringDate) => {
     let humanDate = stringDate.toString().split(' ').slice(0, 4).join(' ');
     return humanDate;    
 }
+
+export const formatToReadableTime = (stringTime) => {
+    let timeDate = stringTime.toString().split(' ').slice(3, 1)
+    return timeDate
+}

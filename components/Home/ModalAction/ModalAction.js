@@ -13,7 +13,7 @@ import {
     COLOR_EMPHASIS,
 } from './../../../constants/constants'
 
-import { formatToReadableDate } from './../../../utils/date'
+import { formatToReadableDate, formatToReadableTime } from './../../../utils/date'
 import DateTimePicker from "react-native-modal-datetime-picker"
 import FormDate from './FormDate/FormDate'
 import FormCategory from './FormCategory/FormCategory'
@@ -30,7 +30,6 @@ class ModalAction extends Component {
     state = {
         startDateTimePickerVisible: false,
         endDateTimePickerVisible: false,
-
         dateControls: {
             pillAction: {
                 initialDate: 'Escoge una fecha inicial',
@@ -43,7 +42,6 @@ class ModalAction extends Component {
                 hourDate: 'Especifica la hora en el calendario'
             }
         },
-
         currentDateInput: null,
         controls: {
             pillInput: {
@@ -70,7 +68,6 @@ class ModalAction extends Component {
                 value: "",
                 valid: true
             }
-
         }
     }
 
@@ -146,23 +143,32 @@ class ModalAction extends Component {
     }
 
     _handleDatePicker = (date) => {
-        let readableDate = formatToReadableDate(date)
+        const readableDate = formatToReadableDate(date);
+        this.setState({
+            dateControls: {
+                ...this.state.dateControls,
+                dateAction: {
+                    startDate: readableDate
+                }
+            }
+        })
+        console.table([this.state.dateControls, readableDate])
+        this._hideDatePicker()
+    }
+
+
+    _handleTimePicker = (time) => {
+        let readableTime = formatToReadableTime(time);
         this.setState({
             dateControls: {
                 ...this.state.dateControls,
                 dateAction: {
                     ...this.state.dateControls.dateAction,
-                    startDate: readableDate
+                    hourDate: readableTime
                 }
             }
         })
-        this._hideDatePicker()
-    }
-
-
-    _handleTimePicker = (date) => {
-        let time = date
-        alert(time);
+        console.table([this.state.dateControls, readableTime])
         this._hideTimePicker()
     }
 
@@ -254,10 +260,10 @@ class ModalAction extends Component {
                     showDatePicker={this._showDatePicker}
                     showHourPicker={this._showTimePicker}
 
-                    initialDate={this.state.dateControls.dateAction.startDate}
+                    startDate={this.state.dateControls.dateAction.startDate}
                     startHour={this.state.dateControls.dateAction.hourDate}
 
-
+                    
 
                 />
             )
