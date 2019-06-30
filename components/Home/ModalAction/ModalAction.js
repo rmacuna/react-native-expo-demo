@@ -50,7 +50,12 @@ class ModalAction extends Component {
             frequencyInput: {
                 value: "",
                 valid: true
-            }
+            },
+            dateInput: {
+                value: "",
+                valid: true
+            },
+
         }
     }
 
@@ -113,7 +118,7 @@ class ModalAction extends Component {
         })
     }
 
-    
+
     render() {
 
         let modalContent = null;
@@ -142,7 +147,8 @@ class ModalAction extends Component {
         } else if (this.props.type === 1) {
             modalContent = (
                 <FormDate 
-
+                    dateNameChange={(value) => this._inputChangeHandler(value, 'dateInput')}
+                    dateReason={this.state.controls.dateInput.value}
                 
                 />
             )
@@ -182,6 +188,7 @@ class ModalAction extends Component {
                         </View>
                     </View>
                 </SafeAreaView>
+
 
                 {/* Componentes de posicionamiento absoluto */}
                 <DateTimePicker

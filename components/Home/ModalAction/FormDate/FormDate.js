@@ -4,7 +4,7 @@ import SquareInput from './../../../UI/SquareInput/SquareInput'
 import NavyButton from './../../../UI/NavyButton/NavyButton'
 import styles from './../ModalAction.styles'
 
-const FormDate = () => {
+const FormDate = (props) => {
     return (
         <View>
             <SquareInput
