@@ -4,7 +4,8 @@ import {
     Text,
     Platform,
     ScrollView,
-    Animated
+    Animated,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { COLOR_LINK } from './../../../constants/constants'
 import styles from './BigActionSheet.styles.js'
@@ -33,7 +34,9 @@ const BigActionSheet = (props) => {
             }
         ]}>
             <View style={styles.iconBar}>
-                <Ionicons onPress={props.onClose} name="md-close" size={22} />
+                <TouchableWithoutFeedback onPress={props.onClose}>
+                    <Ionicons  name="md-close" size={22} />
+                </TouchableWithoutFeedback>
             </View>
             <View style={styles.rowHeader}>
                 <View style={{ alignItems: 'center' }}>

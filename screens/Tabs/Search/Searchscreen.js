@@ -129,10 +129,12 @@ export default class Searchscreen extends Component {
                     />
                     <Animated.View style={
                         [
-                            { opacity: this.state.initialFadePage,
+                            {
+                                width: '90%',
+                                opacity: this.state.initialFadePage,
                             },
                             styles.container
-                        
+
                         ]} >
                         <Text style={styles.superPlaceholder}>{this.state.controls.input.value}</Text>
                         <TextInput
@@ -149,16 +151,16 @@ export default class Searchscreen extends Component {
                             onPress={this.openBigActionSheet}
                             style={styles.buttonBottom}>Resultados de la busqueda</NavyButton>
 
-                        <BigActionSheet
-                            title="Resultados de la busqueda"
-                            subtitle={this.state.controls.input.value}
-                            data={this.state.foundedResults}
-                            visible={this.state.isBigActionSheetVisible}
-                            animation={this.state.animatedY}
-                            onClose={this.closeBigActionSheet}
-                        />
-                    </Animated.View>
 
+                    </Animated.View>
+                    <BigActionSheet
+                        title="Resultados de la busqueda"
+                        subtitle={this.state.controls.input.value}
+                        data={this.state.foundedResults}
+                        visible={this.state.isBigActionSheetVisible}
+                        animation={this.state.animatedY}
+                        onClose={this.closeBigActionSheet}
+                    />
                 </View>
 
 
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
         color: COLOR_LIGHT
     },
     inputSearch: {
-        width: '80%',
+        width: '100%',
         textAlign: 'center',
         color: COLOR_LIGHT,
         fontFamily: 'GorditaMedium',

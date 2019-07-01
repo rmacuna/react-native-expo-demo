@@ -10,7 +10,7 @@ export default StyleSheet.create({
         borderTopRightRadius: 16,
         borderTopLeftRadius: 16,
         bottom: 0,
-        zIndex: 10,
+        zIndex: 20,
         padding: 25
     },
     title: {
