@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, ImageBackground, ScrollView, ActivityIndicator } from 'react-native'
-import { SafeAreaView } from 'react-navigation';
+import { Text, View, ImageBackground, ScrollView, Animated } from 'react-native'
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
 import styles from './Category.styles';
 import NavyButton from '../../../components/UI/NavyButton/NavyButton';
 import { COLOR_EMPHASIS } from '../../../constants/constants';
@@ -8,6 +8,7 @@ import CategoryList from './../../../components/Category/CategoryList/CategoryLi
 export default class CateScreen extends Component {
 
     state = {
+        initialFadePage: new Animated.Value(0),
         categories: [
             {
                 cid: 1,
@@ -28,6 +29,26 @@ export default class CateScreen extends Component {
     }
 
 
+
+    tooggleFade = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 1,
+            }
+        ).start()
+    }
+
+    hideScreen = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 0,
+            }
+        ).start()
+    }
+
+
     render() {
 
         let categories = null;
@@ -45,11 +66,15 @@ export default class CateScreen extends Component {
         }
         return (
             <View style={styles.mainWrapper}>
+                <NavigationEvents
+                    onDidFocus={this.tooggleFade}
+                    onDidBlur={this.hideScreen}
+                />
                 <ImageBackground
                     style={{ width: '100%', height: 280 }}
                     source={require('./../../../assets/images/svgRoundedCategory.png')}>
                     <SafeAreaView>
-                        <View style={styles.categoryTitleHolder}>
+                        <Animated.View style={[styles.categoryTitleHolder, {opacity: this.state.initialFadePage}]}>
                             <Text style={styles.categoryTitle}>
                                 Explora las categorias, añade  recordatorios para ti  y tu familia
                             </Text>
@@ -59,7 +84,7 @@ export default class CateScreen extends Component {
                                 onPress={() => alert('Clicked')}
                                 backgroundColor={COLOR_EMPHASIS}
                                 style={{ width: 250, marginTop: 35 }}>Añadir</NavyButton>
-                        </View>
+                        </Animated.View>
                     </SafeAreaView>
                 </ImageBackground>
                 <View style={styles.horizontalTitleWrapper}>

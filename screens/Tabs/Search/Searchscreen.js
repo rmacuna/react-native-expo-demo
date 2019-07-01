@@ -5,24 +5,26 @@ import {
     StyleSheet,
     Keyboard,
     TextInput,
+    StatusBar,
     Animated,
     TouchableWithoutFeedback
 } from 'react-native';
 import { COLOR_PRIMARY, COLOR_DARK, COLOR_DARK_PLACEHOLDER, COLOR_SECONDARY, COLOR_LIGHT } from '../../../constants/constants';
 import NavyButton from './../../../components/UI/NavyButton/NavyButton';
 import BigActionSheet from './../../../components/UI/BigActionSheet/BigActionSheet';
-
+import { NavigationEvents } from 'react-navigation';
 
 export default class Searchscreen extends Component {
     state = {
         controls: {
             input: {
-                value: "Cita urologo",
+                value: "",
                 placeholder: "Buscar",
                 valid: true
             }
         },
         isBigActionSheetVisible: false,
+        initialFadePage: new Animated.Value(0),
         animatedY: new Animated.Value(700),
         foundedResults: [
             {
@@ -37,6 +39,25 @@ export default class Searchscreen extends Component {
         super(props);
     }
 
+
+    tooggleFade = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 1,
+            }
+        ).start()
+    }
+
+    hideScreen = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 0,
+            }
+        ).start()
+    }
+
     closeBigActionSheet = () => {
         Animated.spring(this.state.animatedY, {
             toValue: 800,
@@ -46,7 +67,7 @@ export default class Searchscreen extends Component {
                 isBigActionSheetVisible: false,
             })
         });
-       
+
     }
 
     _onInputChangeHandler = (value) => {
@@ -88,7 +109,7 @@ export default class Searchscreen extends Component {
         Animated.spring(this.state.animatedY, {
             toValue: 0,
             useNativeDriver: true
-            
+
         }).start();
         this.setState({
             isBigActionSheetVisible: true
@@ -98,30 +119,46 @@ export default class Searchscreen extends Component {
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View style={styles.container}>
-                    <Text style={styles.superPlaceholder}>{this.state.controls.input.value}</Text>
-                    <TextInput
-                        style={styles.inputSearch}
-                        placeholderTextColor="rgba(255,255,255,.5)"
-                        onBlur={this._onBlurHandler}
-                        onFocus={this._onFocusHandler}
-                        onChangeText={(value) => this._onInputChangeHandler(value)}
-                        value={this.state.controls.input.value}
-                        placeholder={this.state.controls.input.placeholder} />
 
-                    <NavyButton
-                        disabled={this.state.foundedResults.length === 0}
-                        onPress={this.openBigActionSheet}
-                        style={styles.buttonBottom}>Resultados de la busqueda</NavyButton>
 
-                    <BigActionSheet
-                        title="Resultados de la busqueda"
-                        subtitle={this.state.controls.input.value}
-                        data={this.state.foundedResults}
-                        visible={this.state.isBigActionSheetVisible}
-                        animation={this.state.animatedY}
-                        onClose={this.closeBigActionSheet}
+                <View style={[styles.container]}>
+                    <StatusBar backgroundColor={COLOR_SECONDARY} />
+                    <NavigationEvents
+                        onDidFocus={this.tooggleFade}
+                        onDidBlur={this.hideScreen}
                     />
+                    <Animated.View style={
+                        [
+                            { opacity: this.state.initialFadePage,
+                            },
+                            styles.container
+                        
+                        ]} >
+                        <Text style={styles.superPlaceholder}>{this.state.controls.input.value}</Text>
+                        <TextInput
+                            style={styles.inputSearch}
+                            placeholderTextColor="rgba(255,255,255,.5)"
+                            onBlur={this._onBlurHandler}
+                            onFocus={this._onFocusHandler}
+                            onChangeText={(value) => this._onInputChangeHandler(value)}
+                            value={this.state.controls.input.value}
+                            placeholder={this.state.controls.input.placeholder} />
+
+                        <NavyButton
+                            disabled={this.state.foundedResults.length === 0}
+                            onPress={this.openBigActionSheet}
+                            style={styles.buttonBottom}>Resultados de la busqueda</NavyButton>
+
+                        <BigActionSheet
+                            title="Resultados de la busqueda"
+                            subtitle={this.state.controls.input.value}
+                            data={this.state.foundedResults}
+                            visible={this.state.isBigActionSheetVisible}
+                            animation={this.state.animatedY}
+                            onClose={this.closeBigActionSheet}
+                        />
+                    </Animated.View>
+
                 </View>
 
 

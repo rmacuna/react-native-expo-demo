@@ -6,7 +6,7 @@ import {
     Animated,
     StatusBar
 } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
 import CategorySlider from './../../../components/Home/CategorySlider/CategorySlider';
 import styles from './Homescreen.styles';
 import Header from '../../../components/Home/Header/Header';
@@ -19,15 +19,18 @@ class Homescreen extends Component {
         showModalAction: false,
         currentAction: '',
         modalAction: null,
+        initialFadePage: new Animated.Value(0),
         animations: {
             circleInitialScale: new Animated.Value(0),
-            itemsInitialOpacity: new Animated.Value(0)
+            itemsInitialOpacity: new Animated.Value(0),
         }
     }
+
 
     _onCardPress = type => {
         this.props.navigation.navigate('CheckPnD', { type: type })
     }
+
 
     _onModalDismiss = () => {
         this.setState({
@@ -58,8 +61,8 @@ class Homescreen extends Component {
                     showModalAction: true
                 });
                 break;
-            default: 
-                return 
+            default:
+                return
         }
     }
 
@@ -73,16 +76,42 @@ class Homescreen extends Component {
     // Función global para navegar de una ruta a otra.
     _onNavigateTo = route => this.props.navigator.navigate(route)
 
+    tooggleFade = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 1,
+            }
+        ).start()
+    }
+
+    hideScreen = () => {
+        Animated.timing(
+            this.state.initialFadePage,
+            {
+                toValue: 0,
+            }
+        ).start()
+    }
     render() {
+
+        
+
         return (
+
             <View style={styles.mainWrapper}>
+                <NavigationEvents 
+                    onDidFocus={this.tooggleFade}
+                    onDidBlur={this.hideScreen}
+                />
+
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor={COLOR_SECONDARY} />
                 <ImageBackground style={{ width: '100%', height: 560 }}
                     source={require('./../../../assets/images/homeSvgBackground.png')} >
-                    <SafeAreaView>
-                        <View style={styles.topContainer}>
+                    <SafeAreaView style={{ flex: 1 }}>
+                        <Animated.View style={[styles.topContainer, { opacity: this.state.initialFadePage }]}>
                             <Header onNextPillPress={this._onPressButtonHandler} />
                             <CategorySlider
                                 pillPress={() => this._onCardPress(0)}
@@ -96,7 +125,7 @@ class Homescreen extends Component {
                                 onPressDate={() => this._onPressItem(1)}
                                 onPressPill={() => this._onPressItem(0)}
                                 initialScale={this.state.animations.circleInitialScale} />
-                        </View>
+                        </Animated.View>
                     </SafeAreaView>
                 </ImageBackground>
 
