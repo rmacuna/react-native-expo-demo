@@ -2,30 +2,51 @@ import React, { Component } from 'react'
 import {
     Text,
     View,
-    Platform, 
-    StyleSheet, 
-    Keyboard, 
-    TextInput, 
-    SafeAreaView,
+    StyleSheet,
+    Keyboard,
+    TextInput,
+    Animated,
     TouchableWithoutFeedback
 } from 'react-native';
 import { COLOR_PRIMARY, COLOR_DARK, COLOR_DARK_PLACEHOLDER, COLOR_SECONDARY, COLOR_LIGHT } from '../../../constants/constants';
 import NavyButton from './../../../components/UI/NavyButton/NavyButton';
+import BigActionSheet from './../../../components/UI/BigActionSheet/BigActionSheet';
 
 
 export default class Searchscreen extends Component {
     state = {
         controls: {
             input: {
-                value: "",
+                value: "Cita urologo",
                 placeholder: "Buscar",
                 valid: true
             }
-        }
+        },
+        isBigActionSheetVisible: false,
+        animatedY: new Animated.Value(700),
+        foundedResults: [
+            {
+                key: "Uhyf",
+                label: "Cita Con Urologo",
+                image: { uri: 'https://encolombia.com/wp-content/uploads/2014/04/acetaminofen-urg-1.jpg' }
+            }
+        ]
     }
 
     constructor(props) {
         super(props);
+    }
+
+    closeBigActionSheet = () => {
+        Animated.spring(this.state.animatedY, {
+            toValue: 800,
+            useNativeDriver: true
+        }).start(() => {
+            this.setState({
+                isBigActionSheetVisible: false,
+            })
+        });
+       
     }
 
     _onInputChangeHandler = (value) => {
@@ -62,6 +83,18 @@ export default class Searchscreen extends Component {
         })
     }
 
+
+    openBigActionSheet = () => {
+        Animated.spring(this.state.animatedY, {
+            toValue: 0,
+            useNativeDriver: true
+            
+        }).start();
+        this.setState({
+            isBigActionSheetVisible: true
+        })
+    }
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -75,8 +108,25 @@ export default class Searchscreen extends Component {
                         onChangeText={(value) => this._onInputChangeHandler(value)}
                         value={this.state.controls.input.value}
                         placeholder={this.state.controls.input.placeholder} />
-                    <NavyButton style={styles.buttonBottom} >Resultados de la busqueda</NavyButton>
+
+                    <NavyButton
+                        disabled={this.state.foundedResults.length === 0}
+                        onPress={this.openBigActionSheet}
+                        style={styles.buttonBottom}>Resultados de la busqueda</NavyButton>
+
+                    <BigActionSheet
+                        title="Resultados de la busqueda"
+                        subtitle={this.state.controls.input.value}
+                        data={this.state.foundedResults}
+                        visible={this.state.isBigActionSheetVisible}
+                        animation={this.state.animatedY}
+                        onClose={this.closeBigActionSheet}
+                    />
                 </View>
+
+
+
+
             </TouchableWithoutFeedback>
 
         )
@@ -89,7 +139,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR_SECONDARY,
-        padding: 15,
         alignItems: 'center',
         justifyContent: 'center'
     },

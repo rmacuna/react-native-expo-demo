@@ -262,9 +262,7 @@ class ModalAction extends Component {
 
                     startDate={this.state.dateControls.dateAction.startDate}
                     startHour={this.state.dateControls.dateAction.hourDate}
-
                     
-
                 />
             )
         } else {

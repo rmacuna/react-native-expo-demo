@@ -19,7 +19,7 @@ import Animated, { Transition, Easing } from 'react-native-reanimated';
 import LogInScreen from './screens/Auth/LoginScreen/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
 import AuthLoadingScreen from './screens/Auth/AuthLoading';
-import { FontAwesome } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import * as constants from './constants/constants';
 import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
 import { useScreens } from 'react-native-screens';
@@ -100,15 +100,15 @@ const AppStack = createBottomTabNavigator({
         // let iconComponent = FontAwesome;
         let iconName;
         if (routeName === 'Search') {
-          iconName = 'search';
+          iconName = Platform.OS === "android" ? 'md-search': 'ios-search';
           // En caso tal de querer tener un icono con una badge.
           // iconComponent = HomeIconWithBadge;
         } else if (routeName === 'Home') {
-          iconName = 'home';
+          iconName = Platform.OS === "android" ? 'md-home': 'ios-home';
         } else {
-          iconName = 'list'
+          iconName = Platform.OS === "android" ? 'md-list': 'ios-list';
         }
-        return <FontAwesome name={iconName} size={22} color={tintColor} />
+        return <Ionicons name={iconName} size={22} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',

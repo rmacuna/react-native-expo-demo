@@ -5,6 +5,9 @@ import ImagePlaceholder from './../ImagePlaceholder/ImagePlaceholder';
 
 const IconList = (props) => {
     return (
+        /**
+         *  Debe recibir un objeto que tenga un label y un image como atributo 
+         */
         <FlatList 
             data={props.listData}
             renderItem={(data) => (
