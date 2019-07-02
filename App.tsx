@@ -11,19 +11,19 @@ import * as Font from 'expo-font';
 import { Dimensions, Platform } from 'react-native';
 
 // Import de ventanas del tab screen.
-import HomeScreen from './screens/Tabs/Home/Homescreen';
-import SearchScreen from './screens/Tabs/Search/Searchscreen';
-import CategoryScreen from './screens/Tabs/Categories/CateScreen';
+import HomeScreen from './src/screens/Tabs/Home/Homescreen';
+import SearchScreen from './src/screens/Tabs/Search/Searchscreen';
+import CategoryScreen from './src/screens/Tabs/Categories/CateScreen';
 import Animated, { Transition, Easing } from 'react-native-reanimated';
 // Import del Auth stack.
-import LogInScreen from './screens/Auth/LoginScreen/LoginScreen';
-import RegisterScreen from './screens/Auth/RegisterScreen/RegisterScreen';
-import AuthLoadingScreen from './screens/Auth/AuthLoading';
+import LogInScreen from './src/screens/Auth/LoginScreen/LoginScreen';
+import RegisterScreen from './src/screens/Auth/RegisterScreen/RegisterScreen';
+import AuthLoadingScreen from './src/screens/Auth/AuthLoading';
 import { Ionicons } from '@expo/vector-icons'
-import * as constants from './constants/constants';
-import ForgotPasswordScreen from './screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
+import * as constants from './src/constants/constants';
+import ForgotPasswordScreen from './src/screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
 import { useScreens } from 'react-native-screens';
-import CheckPnD from './screens/CheckPnD/CheckPnD';
+import CheckPnD from './src/screens/CheckPnD/CheckPnD';
 
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.

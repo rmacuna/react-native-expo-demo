@@ -8,7 +8,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native'
 import { COLOR_LINK } from '../../../constants/constants'
-import styles from './BigActionSheet.styles.js'
+import styles from './BigActionSheet.styles.js.js'
 import IconList from '../../IconList/IconList'
 import { Ionicons } from '@expo/vector-icons'
 

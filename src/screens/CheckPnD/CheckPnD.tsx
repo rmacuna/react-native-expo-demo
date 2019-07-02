@@ -8,38 +8,33 @@ import {
     ScrollView,
     StatusBar
 } from 'react-native'
-import { Ionicons } from '@expo/vector-icons';
-import styles from './CheckPnD.styles';
-import SquareInput from '../../components/UI/SquareInput/SquareInput';
-import { COLOR_SECONDARY } from '../../constants/constants';
-import IconList from '../../components/IconList/IconList';
-import Header from '../../components/Check/Header/Header';
+import { Ionicons } from '@expo/vector-icons'
+import styles from './CheckPnD.styles'
+import SquareInput from '../../components/UI/SquareInput/SquareInput'
+import { COLOR_SECONDARY } from '../../constants/constants'
+import IconList from '../../components/IconList/IconList'
+import Header from '../../components/Check/Header/Header'
 
-class CheckPnD extends Component {
+import NavigationProps from './../../interfaces/navigation'
+
+class CheckPnD extends Component<NavigationProps> {
 
     // Atributo de la clase para saber que tipo de titulo desplegar
 
     state = {
         inputSearch: {
-            value: ""
+            value: "",
         },
-        categories: [
-            // {
-            //     key: '1',
-            //     label: 'Acetaminofen',
-            //     value: 'acetaminofen',
-            //     image: {uri: 'https://encolombia.com/wp-content/uploads/2014/04/acetaminofen-urg-1.jpg'}
-            // },
-        ],
+        categories: [],
         category: 'roberto'
 
     }
 
-    _onBackButtonPress = () => {
-        this.props.navigation.goBack();
+    private _onBackButtonPress = () => {
+        this.props.navigation.goBack()
     }
 
-    _onSearchTextChangeHandler = (value) => {
+    private _onSearchTextChangeHandler = (value) => {
         this.setState({
             inputSearch: {
                 value: value
@@ -47,21 +42,20 @@ class CheckPnD extends Component {
         })
     }
 
-    _onPickerValueChange = (itemValue, itemIndex) => {
+    private _onPickerValueChange = (itemValue: any, itemIndex: Number) => {
         // Creo una copia del array para no mutar el estado.
-        const arrayCopy = [...this.state.categories];
-
-        const indexOfItemFounded = arrayCopy.findIndex((element, index) => {
+        const arrayCopy: any[] = [...this.state.categories]
+        const indexOfItemFounded = arrayCopy.findIndex((element: any, index: Number) => {
             return index === itemIndex && element.value === itemValue
-        });
+        })
 
         this.setState({
             category: arrayCopy[indexOfItemFounded].value
-        });
+        })
     }
     render() {
-        const { navigation } = this.props;
-        const type = navigation.getParam('type');
+        const { navigation } = this.props
+        const type = navigation.getParam('type')
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -84,7 +78,7 @@ class CheckPnD extends Component {
                         <View style={[styles.row, { justifyContent: 'space-between', marginTop: 40 }]}>
                             <View>
                                 <Text style={styles.title}>Todas</Text>
-                                <Text style={styles.subtitle} >de {this.state.category}</Text>
+                                <Text style={styles.subtitle}>de {this.state.category}</Text>
                             </View>
                             <View>
                                 {/* <Picker
