@@ -33,9 +33,13 @@
     ]
   },
   "devDependencies": {
+    "@types/expo": "^32.0.13",
+    "@types/react": "^16.8.22",
+    "@types/react-native": "^0.57.65",
     "babel-preset-expo": "^5.1.1",
     "jest-expo": "^33.0.2",
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^16.8.6",
+    "typescript": "^3.5.2"
   },
   "private": true
 }
