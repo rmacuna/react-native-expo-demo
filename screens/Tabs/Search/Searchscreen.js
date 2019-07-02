@@ -144,7 +144,7 @@ export default class Searchscreen extends Component {
                             onFocus={this._onFocusHandler}
                             onChangeText={(value) => this._onInputChangeHandler(value)}
                             value={this.state.controls.input.value}
-                            placeholder={this.state.controls.input.placeholder} />
+                             placeholder={this.state.controls.input.placeholder} />
 
                         <NavyButton
                             disabled={this.state.foundedResults.length === 0}

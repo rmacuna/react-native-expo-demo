@@ -1,6 +1,5 @@
 
 // import {StyleSheet } from 'react-native'
-
 export const COLOR_PRIMARY = '#FFC857';
 export const COLOR_SECONDARY = '#36284C';
 export const COLOR_DARK = 'rgba(50,48,49,1)';

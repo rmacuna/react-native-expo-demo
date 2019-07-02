@@ -108,7 +108,7 @@ const AppStack = createBottomTabNavigator({
         } else {
           iconName = Platform.OS === "android" ? 'md-list': 'ios-list';
         }
-        return <Ionicons name={iconName} size={22} color={tintColor} />
+        return <Ionicons name={iconName} size={24} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',
@@ -121,10 +121,13 @@ const AppStack = createBottomTabNavigator({
       labelStyle: {
         fontSize: 12,
         paddingBottom: Platform.OS === "android" ? 10 : null,
-        fontFamily: 'GorditaMedium'
+        paddingTop: Platform.OS === "android" ? '10%' : null,
+        fontFamily: 'GorditaRegular'
       },
       style: {
-        height: Platform.OS === "android" ? 70 : 50,
+        justifyContent: 'center',
+        paddingTop: Platform.OS === "android" ? 20 : null, 
+        height: Platform.OS === "android" ? 64  : 50,
         backgroundColor: constants.COLOR_SECONDARY,
       },
     }
