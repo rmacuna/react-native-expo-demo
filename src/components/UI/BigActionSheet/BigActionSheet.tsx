@@ -2,13 +2,11 @@ import React, { useState } from 'react'
 import {
     View,
     Text,
-    Platform,
     ScrollView,
     Animated,
     TouchableWithoutFeedback
 } from 'react-native'
-import { COLOR_LINK } from '../../../constants/constants'
-import styles from './BigActionSheet.styles.js.js'
+import styles from './BigActionSheet.styles'
 import IconList from '../../IconList/IconList'
 import { Ionicons } from '@expo/vector-icons'
 

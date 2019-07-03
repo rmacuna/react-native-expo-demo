@@ -13,8 +13,10 @@ import Header from '../../../components/Home/Header/Header';
 import Additems from '../../../components/Home/AddItems/Additems';
 import { COLOR_SECONDARY } from '../../../constants/constants'
 import ModalAction from '../../../components/Home/ModalAction/ModalAction';
+import NavProps from './../../../interfaces/navigation';
 
-class Homescreen extends Component {
+class Homescreen extends Component<NavProps> {
+
     state = {
         showModalAction: false,
         currentAction: '',
@@ -74,7 +76,7 @@ class Homescreen extends Component {
     }
 
     // Función global para navegar de una ruta a otra.
-    _onNavigateTo = route => this.props.navigator.navigate(route)
+    _onNavigateTo = route => this.props.navigation.navigate(route)
 
     tooggleFade = () => {
         Animated.timing(

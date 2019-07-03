@@ -3,7 +3,8 @@ import {
   createStackNavigator,
   createSwitchNavigator,
   createBottomTabNavigator,
-  createAppContainer
+  createAppContainer,
+  SceneView
 } from 'react-navigation';
 
 import * as Font from 'expo-font';
@@ -24,7 +25,8 @@ import * as constants from './src/constants/constants';
 import ForgotPasswordScreen from './src/screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
 import { useScreens } from 'react-native-screens';
 import CheckPnD from './src/screens/CheckPnD/CheckPnD';
-
+import NavProps from './src/interfaces/navigation';
+import {getValuesForPlatforms} from './src/utils/PlatformValues'
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
  Luego se debe crear el stack de navegacion de tabs y el switch navigator para ir
@@ -34,12 +36,18 @@ import CheckPnD from './src/screens/CheckPnD/CheckPnD';
 
 useScreens();
 
+const PlatformValues = getValuesForPlatforms();
 
 // const SwitchHomeToChecks = createAnimatedSwitchNavigator({
 //   Check: CheckStack
 // })
 
-const fade = (sceneProps) => {
+
+// const getPaddings = () => {
+//   return 
+// }
+
+const fade = (sceneProps: any ) => {
 
   const { scene, position } = sceneProps;
   const index = scene.index
@@ -92,43 +100,58 @@ const AppStack = createBottomTabNavigator({
   Search: SearchScreen,
   Home: CheckStack,
   Categories: CategoryScreen
-}, {
-    defaultNavigationOptions: ({ navigation }) => ({
-      
+},
+  {
+    navigationOptions:  ({ navigation }: any) => ({
+
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         // let iconComponent = FontAwesome;
         let iconName;
         if (routeName === 'Search') {
-          iconName = Platform.OS === "android" ? 'md-search': 'ios-search';
+          iconName = Platform.OS === "android" ? 'md-search' : 'ios-search';
           // En caso tal de querer tener un icono con una badge.
           // iconComponent = HomeIconWithBadge;
         } else if (routeName === 'Home') {
-          iconName = Platform.OS === "android" ? 'md-home': 'ios-home';
+          iconName = Platform.OS === "android" ? 'md-home' : 'ios-home';
         } else {
-          iconName = Platform.OS === "android" ? 'md-list': 'ios-list';
+          iconName = Platform.OS === "android" ? 'md-list' : 'ios-list';
         }
         return <Ionicons name={iconName} size={24} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',
-    tabBarPosition: 'bottom',
     tabBarOptions: {
       inactiveTintColor: '#fff',
       activeTintColor: constants.COLOR_PRIMARY,
       labelStyle: {
         fontSize: 12,
-        paddingBottom: Platform.OS === "android" ? 10 : null,
-        paddingTop: Platform.OS === "android" ? '10%' : null,
-        fontFamily: 'GorditaRegular'
+        fontFamily: 'GorditaRegular',
+        // paddingBottom: PlatformValues.paddingBottomForLabel,
       },
       style: {
         justifyContent: 'center',
-        paddingTop: Platform.OS === "android" ? 20 : null, 
-        height: Platform.OS === "android" ? 64  : 50,
+        // paddingTop: 50,
         backgroundColor: constants.COLOR_SECONDARY,
-      },
+        // height: PlatformValues.heightForBottomTab 
+      }
     }
+    // tabBarOptions: {
+    //   inactiveTintColor: '#fff',
+    //   activeTintColor: constants.COLOR_PRIMARY,
+    //   labelStyle: {
+    //     fontSize: 12,
+    //     paddingBottom: Platform.OS === "android" ? 10 : null,
+    //     paddingTop: Platform.OS === "android" ? '10%' : null,
+    //     fontFamily: 'GorditaRegular'
+    //   },
+    //   style: {
+    //     justifyContent: 'center',
+    //     paddingTop: Platform.OS === "android" ? 20 : null,
+    //     height: Platform.OS === "android" ? 64 : 50,
+    //     backgroundColor: constants.COLOR_SECONDARY,
+    //   }
+    // }
   });
 
 const AuthStack = createStackNavigator({
@@ -183,10 +206,10 @@ export default class App extends Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'GorditaMedium': require('./assets/fonts/Gordita-Medium.ttf'),
-      'GorditaBold': require('./assets/fonts/Gordita-Bold.ttf'),
-      'GorditaRegular': require('./assets/fonts/Gordita-regular.ttf'),
-      'GorditaBlack': require('./assets/fonts/Gordita-Black.ttf')
+      'GorditaMedium': require('./src/assets/fonts/Gordita-Medium.ttf'),
+      'GorditaBold': require('./src/assets/fonts/Gordita-Bold.ttf'),
+      'GorditaRegular': require('./src/assets/fonts/Gordita-regular.ttf'),
+      'GorditaBlack': require('./src/assets/fonts/Gordita-Black.ttf')
     });
 
     this.setState({ fontLoaded: true });

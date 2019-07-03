@@ -19,21 +19,20 @@ import FormDate from './FormDate/FormDate'
 import FormCategory from './FormCategory/FormCategory'
 import FormPill from './FormPill/FormPill'
 import styles from './ModalAction.styles'
+import { ModalActionProps, ModalActionState } from './ModalAction.interface'
 
 
 
 
 
-class ModalAction extends Component {
-
-
-    state = {
-        startDateTimePickerVisible: false,
-        endDateTimePickerVisible: false,
+class ModalAction extends React.PureComponent<ModalActionProps, ModalActionState>{
+    state: ModalActionState = {
+        startDateTimePicker: false,
+        endDateTimePicker: false,
         dateControls: {
             pillAction: {
                 initialDate: 'Escoge una fecha inicial',
-                finalDate: 'Escoge una fecha final',
+                finalDate: 'Escoge una fecha final'
             },
             dateAction: {
                 startDateTimePickerVisible: false,
@@ -73,18 +72,18 @@ class ModalAction extends Component {
 
 
     // Usar el datetime picker para la fecha inicial.
-    _showStartDateTimePicker = (value) => {
+    _showStartDateTimePicker = (value: any) => {
         this.setState({
-            startDateTimePickerVisible: true,
+            startDateTimePicker: true,
             currentDateInput: value
         });
     };
 
     // Usar el datetime picker para la fecha final
 
-    _showEndDateTimePicker = (value) => {
+    _showEndDateTimePicker = (value: any) => {
         this.setState({
-            endDateTimePickerVisible: true,
+            endDateTimePicker: true,
             currentDateInput: value
         })
     }
@@ -92,17 +91,17 @@ class ModalAction extends Component {
     // Esconder el datetime picker
     _hideStartDateTimePicker = () => {
         this.setState({
-            startDateTimePickerVisible: false
+            startDateTimePicker: false
         })
     };
 
     _hideEndDateTimePicker = () => {
         this.setState({
-            endDateTimePickerVisible: false
+            endDateTimePicker: false
         })
     }
 
-    _handleStartDatePicker = (date) => {
+    _handleStartDatePicker = (date: any) => {
         let readableDate = formatToReadableDate(date)
         this.setState({
             dateControls: {
@@ -116,7 +115,7 @@ class ModalAction extends Component {
         this._hideStartDateTimePicker();
     };
 
-    _handleEndDatePicker = (date) => {
+    _handleEndDatePicker = (date: any) => {
         let readableDate = formatToReadableDate(date)
         this.setState({
             dateControls: {
@@ -130,7 +129,7 @@ class ModalAction extends Component {
         this._hideEndDateTimePicker();
     }
 
-    _inputChangeHandler = (value, key) => {
+    _inputChangeHandler = (value: any, key) => {
         this.setState({
             controls: {
                 ...this.state.controls,
@@ -142,7 +141,7 @@ class ModalAction extends Component {
         })
     }
 
-    _handleDatePicker = (date) => {
+    _handleDatePicker = (date: any) => {
         const readableDate = formatToReadableDate(date);
         this.setState({
             dateControls: {
@@ -157,7 +156,7 @@ class ModalAction extends Component {
     }
 
 
-    _handleTimePicker = (time) => {
+    _handleTimePicker = (time: any) => {
         let readableTime = formatToReadableTime(time);
         this.setState({
             dateControls: {
@@ -229,111 +228,111 @@ class ModalAction extends Component {
         let modalContent = null;
 
 
-        if (this.props.type === 0) {
-            modalContent = (
-                <FormPill
-                    pillNameChange={(value) => this._inputChangeHandler(value, 'pillInput')}
-                    pillQuantityChange={(value) => this._inputChangeHandler(value, 'quantityInput')}
-                    keywordsChange={(value) => this._inputChangeHandler(value, 'keywordsInput')}
-                    hoursFrequencyChange={(value) => this._inputChangeHandler(value, 'frequencyInput')}
+if (this.props.type === 0) {
+    modalContent = (
+        <FormPill
+            pillNameChange={(value: any) => this._inputChangeHandler(value, 'pillInput')}
+            pillQuantityChange={(value: any) => this._inputChangeHandler(value, 'quantityInput')}
+            keywordsChange={(value: any) => this._inputChangeHandler(value, 'keywordsInput')}
+            hoursFrequencyChange={(value: any) => this._inputChangeHandler(value, 'frequencyInput')}
 
-                    pillName={this.state.controls.pillInput.value}
-                    pillQuantity={this.state.controls.quantityInput.value}
-                    keywords={this.state.controls.keywordsInput.value}
-                    hoursFrequency={this.state.controls.frequencyInput.value}
+            pillName={this.state.controls.pillInput.value}
+            pillQuantity={this.state.controls.quantityInput.value}
+            keywords={this.state.controls.keywordsInput.value}
+            hoursFrequency={this.state.controls.frequencyInput.value}
 
-                    showStartDatePicker={this._showStartDateTimePicker}
-                    showEndDatePicker={this._showEndDateTimePicker}
+            showStartDatePicker={this._showStartDateTimePicker}
+            showEndDatePicker={this._showEndDateTimePicker}
 
-                    initialDate={this.state.dateControls.pillAction.initialDate}
-                    finalDate={this.state.dateControls.pillAction.finalDate}
-                />
-            )
-        } else if (this.props.type === 1) {
-            modalContent = (
-                <FormDate
-                    dateNameChange={(value) => this._inputChangeHandler(value, 'dateNameInput')}
-                    dateName={this.state.controls.dateNameInput.value}
-                    dateReasonChange={(value) => this._inputChangeHandler(value, 'dateReasonInput')}
-                    dateReason={this.state.controls.dateReasonInput.value}
+            initialDate={this.state.dateControls.pillAction.initialDate}
+            finalDate={this.state.dateControls.pillAction.finalDate}
+        />
+    )
+} else if (this.props.type === 1) {
+    modalContent = (
+        <FormDate
+            dateNameChange={(value: any) => this._inputChangeHandler(value, 'dateNameInput')}
+            dateName={this.state.controls.dateNameInput.value}
+            dateReasonChange={(value: any) => this._inputChangeHandler(value, 'dateReasonInput')}
+            dateReason={this.state.controls.dateReasonInput.value}
 
-                    showDatePicker={this._showDatePicker}
-                    showHourPicker={this._showTimePicker}
+            showDatePicker={this._showDatePicker}
+            showHourPicker={this._showTimePicker}
 
-                    startDate={this.state.dateControls.dateAction.startDate}
-                    startHour={this.state.dateControls.dateAction.hourDate}
-                    
-                />
-            )
-        } else {
-            modalContent = (
-                <FormCategory />
-            )
-        }
+            startDate={this.state.dateControls.dateAction.startDate}
+            startHour={this.state.dateControls.dateAction.hourDate}
 
-        return (
-            <Modal
-                transparent={false}
-                onRequestClose={this.props.onItemClosed}
-                visible={this.props.active}
-                animationType="slide">
-                <StatusBar barStyle="dark-content" backgroundColor={STATUSBAR_PRIMARY_COLOR} />
-                <SafeAreaView style={{ flex: 1, backgroundColor: STATUSBAR_PRIMARY_COLOR }}>
-                    <View style={styles.container}>
-                        <View style={styles.card}>
-                            <View style={styles.modalHeader}>
-                                <Text style={styles.modalHeader_title}>{this.props.headerTitle}</Text>
-                            </View>
-                            <ScrollView>
-                                {/* Renderizo el contenido del modalContent. */}
-                                {modalContent}
+        />
+    )
+} else {
+    modalContent = (
+        <FormCategory />
+    )
+}
 
-                                <View style={styles.separador}></View>
-                                <View style={styles.row}>
-                                    <TouchableOpacity style={{ flex: 1 }}>
-                                        <Text style={styles.textButton}>Añadir</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{ flex: 1 }} onPress={this.props.modalClose}>
-                                        <Text style={[styles.textButton, { color: COLOR_EMPHASIS }]}>Cerrar</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </ScrollView>
-                        </View>
+return (
+    <Modal
+        transparent={false}
+        onRequestClose={this.props.onItemClosed}
+        visible={this.props.active}
+        animationType="slide">
+        <StatusBar barStyle="dark-content" backgroundColor={STATUSBAR_PRIMARY_COLOR} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: STATUSBAR_PRIMARY_COLOR }}>
+            <View style={styles.container}>
+                <View style={styles.card}>
+                    <View style={styles.modalHeader}>
+                        <Text style={styles.modalHeader_title}>{this.props.headerTitle}</Text>
                     </View>
-                </SafeAreaView>
+                    <ScrollView>
+                        {/* Renderizo el contenido del modalContent. */}
+                        {modalContent}
+
+                        <View style={styles.separador}></View>
+                        <View style={styles.row}>
+                            <TouchableOpacity style={{ flex: 1 }}>
+                                <Text style={styles.textButton}>Añadir</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ flex: 1 }} onPress={this.props.modalClose}>
+                                <Text style={[styles.textButton, { color: COLOR_EMPHASIS }]}>Cerrar</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ScrollView>
+                </View>
+            </View>
+        </SafeAreaView>
 
 
-                {/* Componentes de posicionamiento absoluto */}
-                <DateTimePicker
-                    isVisible={this.state.startDateTimePickerVisible}
-                    onConfirm={this._handleStartDatePicker}
-                    onCancel={this._hideStartDateTimePicker}
-                />
-                <DateTimePicker
-                    isVisible={this.state.endDateTimePickerVisible}
-                    onConfirm={this._handleEndDatePicker}
-                    onCancel={this._hideEndDateTimePicker}
-                />
+        {/* Componentes de posicionamiento absoluto */}
+        <DateTimePicker
+            isVisible={this.state.startDateTimePicker}
+            onConfirm={this._handleStartDatePicker}
+            onCancel={this._hideStartDateTimePicker}
+        />
+        <DateTimePicker
+            isVisible={this.state.endDateTimePicker}
+            onConfirm={this._handleEndDatePicker}
+            onCancel={this._hideEndDateTimePicker}
+        />
 
-                {/* Date time picker para el modal de citas */}
+        {/* Date time picker para el modal de citas */}
 
-                <DateTimePicker
-                    isVisible={this.state.dateControls.dateAction.startDateTimePickerVisible}
-                    onConfirm={this._handleDatePicker}
-                    onCancel={this._hideDatePicker}
-                    mode="date"
-                />
+        <DateTimePicker
+            isVisible={this.state.dateControls.dateAction.startDateTimePickerVisible}
+            onConfirm={this._handleDatePicker}
+            onCancel={this._hideDatePicker}
+            mode="date"
+        />
 
-                <DateTimePicker
-                    isVisible={this.state.dateControls.dateAction.startTimePickerVisible}
-                    onConfirm={this._handleTimePicker}
-                    onCancel={this._hideTimePicker}
-                    mode="time"
-                />
+        <DateTimePicker
+            isVisible={this.state.dateControls.dateAction.startTimePickerVisible}
+            onConfirm={this._handleTimePicker}
+            onCancel={this._hideTimePicker}
+            mode="time"
+        />
 
 
-            </Modal>
-        )
+    </Modal>
+)
     }
 }
 export default ModalAction;
