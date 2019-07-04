@@ -6,7 +6,7 @@ import styles from './ImagePlaceholder.styles'
 
 const ImagePlaceholder: React.FC<ImagePlaceHolderProps> = (props) => {
     return (
-        <View style={[styles.container, { backgroundColor: props.backgroundColor }]}>
+        <View style={[styles.container, , { backgroundColor: props.backgroundColor }]}>
             <Image
                 style={{ width: 100, height: 100 }}
                 source={require('./../../assets/images/box.png')} />
@@ -16,7 +16,7 @@ const ImagePlaceholder: React.FC<ImagePlaceHolderProps> = (props) => {
 }
 
 ImagePlaceholder.defaultProps = {
-    backgroundColor: 'rgba(255,255,25,1)'
+    backgroundColor: 'rgba(255,255,255,1)'
 }
 
 

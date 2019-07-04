@@ -8,7 +8,8 @@ import { ViewStyle } from 'react-native'
  * usado para renderizar algo cuando no existan elementos en el componente lista
  */
 export default interface ImagePlaceHolderProps {
-    backgroundColor?: String
+    backgroundColor?: string | undefined,
+    children?: JSX.Element,
 } 
 
 

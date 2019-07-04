@@ -1,19 +1,20 @@
+import { Color } from "csstype";
 
 // import {StyleSheet } from 'react-native'
 export const COLOR_PRIMARY = '#FFC857';
 export const COLOR_SECONDARY = '#36284C';
-export const COLOR_DARK = 'rgba(50,48,49,1)';
-export const COLOR_DARK_PLACEHOLDER = 'rgba(50,48,49,.6)';
+export const COLOR_DARK: String = 'rgba(50,48,49,1)';
+export const COLOR_DARK_PLACEHOLDER: String = 'rgba(50,48,49,.6)';
 
-export const COLOR_LINK = "#4485B4";
-export const COLOR_LIGHT = '#F6F6F6';
-export const COLOR_EMPHASIS = '#FF8F73';
+export const COLOR_LINK: String = "#4485B4";
+export const COLOR_LIGHT: String = '#F6F6F6';
+export const COLOR_EMPHASIS: String = '#FF8F73';
 
-export const DISABLED_BUTTON_COLOR = 'rgba(80,66,101,.8)';
-export const DISABLED_BUTTON_TEXTCOLOR = 'rgba(150,150,150,1)';
+export const DISABLED_BUTTON_COLOR: String = 'rgba(80,66,101,.8)';
+export const DISABLED_BUTTON_TEXTCOLOR: String = 'rgba(150,150,150,1)';
 
-export const HOME_BACKGROUND_COLOR = '#504265';
-export const STATUSBAR_PRIMARY_COLOR = "#EBB850"
+export const HOME_BACKGROUND_COLOR: String = '#504265';
+export const STATUSBAR_PRIMARY_COLOR: String = "#EBB850"
 
 export const ICON_SIZES={
     small: 14,

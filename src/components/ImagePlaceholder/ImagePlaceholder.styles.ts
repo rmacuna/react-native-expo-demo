@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Styles } from './props.interface';
 import { FONT_SIZE } from '../../constants/constants';
 

@@ -26,7 +26,7 @@ import ForgotPasswordScreen from './src/screens/Auth/ForgotPasswordScreen/Forgot
 import { useScreens } from 'react-native-screens';
 import CheckPnD from './src/screens/CheckPnD/CheckPnD';
 import NavProps from './src/interfaces/navigation';
-import {getValuesForPlatforms} from './src/utils/PlatformValues'
+import { getValuesForPlatforms } from './src/utils/PlatformValues'
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
  Luego se debe crear el stack de navegacion de tabs y el switch navigator para ir
@@ -47,7 +47,7 @@ const PlatformValues = getValuesForPlatforms();
 //   return 
 // }
 
-const fade = (sceneProps: any ) => {
+const fade = (sceneProps: any) => {
 
   const { scene, position } = sceneProps;
   const index = scene.index
@@ -102,8 +102,7 @@ const AppStack = createBottomTabNavigator({
   Categories: CategoryScreen
 },
   {
-    navigationOptions:  ({ navigation }: any) => ({
-
+    defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         // let iconComponent = FontAwesome;
@@ -117,7 +116,7 @@ const AppStack = createBottomTabNavigator({
         } else {
           iconName = Platform.OS === "android" ? 'md-list' : 'ios-list';
         }
-        return <Ionicons name={iconName} size={24} color={tintColor} />
+        return <Ionicons style={{paddingTop: 5}} name={iconName} size={24} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',
@@ -127,31 +126,16 @@ const AppStack = createBottomTabNavigator({
       labelStyle: {
         fontSize: 12,
         fontFamily: 'GorditaRegular',
-        // paddingBottom: PlatformValues.paddingBottomForLabel,
+        marginBottom: PlatformValues.paddingBottomForLabel,
+        // paddingTop: PlatformValues.paddingTopForLabel
       },
       style: {
         justifyContent: 'center',
-        // paddingTop: 50,
         backgroundColor: constants.COLOR_SECONDARY,
-        // height: PlatformValues.heightForBottomTab 
+        height: PlatformValues.heightForBottomTab,
+        // paddingTop: PlatformValues.paddingTopForTab
       }
     }
-    // tabBarOptions: {
-    //   inactiveTintColor: '#fff',
-    //   activeTintColor: constants.COLOR_PRIMARY,
-    //   labelStyle: {
-    //     fontSize: 12,
-    //     paddingBottom: Platform.OS === "android" ? 10 : null,
-    //     paddingTop: Platform.OS === "android" ? '10%' : null,
-    //     fontFamily: 'GorditaRegular'
-    //   },
-    //   style: {
-    //     justifyContent: 'center',
-    //     paddingTop: Platform.OS === "android" ? 20 : null,
-    //     height: Platform.OS === "android" ? 64 : 50,
-    //     backgroundColor: constants.COLOR_SECONDARY,
-    //   }
-    // }
   });
 
 const AuthStack = createStackNavigator({

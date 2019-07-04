@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, StyleProp } from 'react-native';
 export default StyleSheet.create({
     cardCircle: {
         width: 70,
@@ -12,7 +12,8 @@ export default StyleSheet.create({
         fontFamily: 'GorditaMedium',
         color: '#FFE3DC',
         paddingLeft: 5,
-        paddingTop: 5
+        paddingTop: 5,
+        textAlign: 'center'
     },
     horizontalWrapper: {
         width: '100%',

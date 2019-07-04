@@ -106,7 +106,6 @@ class Homescreen extends Component<NavProps> {
                     onDidFocus={this.tooggleFade}
                     onDidBlur={this.hideScreen}
                 />
-
                 <StatusBar
                     barStyle="light-content"
                     backgroundColor={COLOR_SECONDARY} />

@@ -2,50 +2,50 @@ export interface ModalActionProps {
     type: Number,
     active?: boolean,
     onItemClosed: any,
-    headerTitle: String,
+    headerTitle: string,
     modalClose: any
 }
 export interface ModalActionState {
-    startDateTimePicker: Boolean,
-    endDateTimePicker: Boolean,
+    startDateTimePicker: boolean,
+    endDateTimePicker: boolean,
     dateControls: {
         pillAction: {
-            initialDate: String,
-            finalDate: String
+            initialDate: string,
+            finalDate: string
         },
         dateAction: {
-            startDateTimePickerVisible: Boolean,
-            startTimePickerVisible: Boolean,
-            startDate: String,
-            hourDate: String
+            startDateTimePickerVisible: boolean,
+            startTimePickerVisible: boolean,
+            startDate: string,
+            hourDate: string
         },
     },
 
     currentDateInput: null | any,
     controls: {
         pillInput: {
-            value: String,
-            valid: Boolean,
+            value: string,
+            valid: boolean,
         },
         quantityInput: {
-            value: String,
-            valid: Boolean
+            value: string,
+            valid: boolean
         },
         keywordsInput: {
-            value: String,
-            valid: Boolean
+            value: string,
+            valid: boolean
         },
         frequencyInput: {
-            value: String,
-            valid: Boolean
+            value: string,
+            valid: boolean
         },
         dateNameInput: {
-            value: String,
-            valid: Boolean
+            value: string,
+            valid: boolean
         },
         dateReasonInput: {
-            value: String,
-            valid: Boolean
+            value: string,
+            valid: boolean
         }
     }
 }

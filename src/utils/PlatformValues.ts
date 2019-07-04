@@ -14,11 +14,11 @@ export const getValuesForPlatforms = () => {
     } else {
         return (
             {
-                paddingBottomForLabel: null,
-                paddingTopForLabel: null,
+                paddingBottomForLabel: 0,
+                paddingTopForLabel: undefined,
 
                 heightForBottomTab: 50,
-                paddingTopForTab: null 
+                paddingTopForTab: undefined 
             }
         )
     }
