@@ -5,7 +5,9 @@ import styles from './Category.styles';
 import NavyButton from '../../../components/UI/NavyButton/NavyButton';
 import { COLOR_EMPHASIS } from '../../../constants/constants';
 import CategoryList from '../../../components/Category/CategoryList/CategoryList';
-export default class CateScreen extends Component {
+import NavProps from './../../../interfaces/navigation'
+
+export default class CateScreen extends Component<NavProps> {
 
     state = {
         initialFadePage: new Animated.Value(0),
@@ -25,8 +27,19 @@ export default class CateScreen extends Component {
                 categoryName: 'Mama',
                 colorBar: '#44B44F',
             },
-        ]
+        ],
+        animationValues: {
+            inputLabelOpacity: new Animated.Value(0),
+            inputLabelInitialPosition: new Animated.Value(300)
+        },
+        inputControls: {
+            categoryName: {
+                value: "",
+                isLabelVisible: false,
+            },
+        }
     }
+
 
 
 
@@ -74,14 +87,14 @@ export default class CateScreen extends Component {
                     style={{ width: '100%', height: 280 }}
                     source={require('./../../../assets/images/svgRoundedCategory.png')}>
                     <SafeAreaView>
-                        <Animated.View style={[styles.categoryTitleHolder, {opacity: this.state.initialFadePage}]}>
+                        <Animated.View style={[styles.categoryTitleHolder, { opacity: this.state.initialFadePage }]}>
                             <Text style={styles.categoryTitle}>
                                 Explora las categorias, añade  recordatorios para ti  y tu familia
                             </Text>
                             <NavyButton
                                 underlayColor="#E78067"
                                 color="#fff"
-                                onPress={() => alert('Clicked')}
+                                onPress={() => this.props.navigation.navigate('CategoryModal')}
                                 backgroundColor={COLOR_EMPHASIS}
                                 style={{ width: 250, marginTop: 35 }}>Añadir</NavyButton>
                         </Animated.View>

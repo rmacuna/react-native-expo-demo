@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
-import { FONT_SIZE } from '../../../constants/constants';
-export default StyleSheet.create({
+import { StyleSheet } from 'react-native'
+import { FONT_SIZE, COLOR_LINK } from '../../../constants/constants'
+import SquareInputStyles from './SquareInput.interface'
+
+export default StyleSheet.create<SquareInputStyles>({
     squareInput: {
         paddingTop: 14,
         paddingBottom: 14,
@@ -20,5 +22,11 @@ export default StyleSheet.create({
         backgroundColor: '#F6F6F6',
         borderRadius: 8,
         paddingLeft: 9.66
+    },
+    labelIndicator: {
+        textAlign: 'right',
+        paddingEnd: 20,
+        fontFamily: 'GorditaRegular',
+        color: COLOR_LINK
     }
 })

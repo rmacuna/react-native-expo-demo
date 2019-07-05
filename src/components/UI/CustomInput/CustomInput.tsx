@@ -19,7 +19,7 @@ const CustomInput = (props) => {
     })
 
 
-    _onBlurHandler = () => {
+    const _onBlurHandler = () => {
         if (props.value.trim().length === 0) {
             Animated.parallel([
                 Animated.timing(
@@ -43,7 +43,7 @@ const CustomInput = (props) => {
 
     }
 
-    _onFocusInputHandler = () => {
+    const _onFocusInputHandler = () => {
         Animated.parallel([
             Animated.timing(
                 animation.initialBottomRange,

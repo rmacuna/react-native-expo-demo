@@ -1,31 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   createStackNavigator,
   createSwitchNavigator,
   createBottomTabNavigator,
   createAppContainer,
-  SceneView
-} from 'react-navigation';
+  SceneView,
+  NavigationScreenConfig,
+  NavigationScreenOptions, // Type parar definir las configuraciones en react navigation.
+  NavigationStackScreenOptions
+} from 'react-navigation'
 
-import * as Font from 'expo-font';
+import * as Font from 'expo-font'
 
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform } from 'react-native'
 
 // Import de ventanas del tab screen.
-import HomeScreen from './src/screens/Tabs/Home/Homescreen';
-import SearchScreen from './src/screens/Tabs/Search/Searchscreen';
-import CategoryScreen from './src/screens/Tabs/Categories/CateScreen';
-import Animated, { Transition, Easing } from 'react-native-reanimated';
+import HomeScreen from './src/screens/Tabs/Home/Homescreen'
+import SearchScreen from './src/screens/Tabs/Search/Searchscreen'
+import CategoryScreen from './src/screens/Tabs/Categories/CateScreen'
+import CategoryAdd from './src/components/Category/CategoryAdd/CategoryAdd'
+import Animated, { Transition, Easing } from 'react-native-reanimated'
 // Import del Auth stack.
-import LogInScreen from './src/screens/Auth/LoginScreen/LoginScreen';
-import RegisterScreen from './src/screens/Auth/RegisterScreen/RegisterScreen';
-import AuthLoadingScreen from './src/screens/Auth/AuthLoading';
+import LogInScreen from './src/screens/Auth/LoginScreen/LoginScreen'
+import RegisterScreen from './src/screens/Auth/RegisterScreen/RegisterScreen'
+import AuthLoadingScreen from './src/screens/Auth/AuthLoading'
 import { Ionicons } from '@expo/vector-icons'
-import * as constants from './src/constants/constants';
-import ForgotPasswordScreen from './src/screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen';
-import { useScreens } from 'react-native-screens';
-import CheckPnD from './src/screens/CheckPnD/CheckPnD';
-import NavProps from './src/interfaces/navigation';
+import * as constants from './src/constants/constants'
+import ForgotPasswordScreen from './src/screens/Auth/ForgotPasswordScreen/ForgotPasswordScreen'
+import { useScreens } from 'react-native-screens'
+import CheckPnD from './src/screens/CheckPnD/CheckPnD'
+import NavProps from './src/interfaces/navigation'
 import { getValuesForPlatforms } from './src/utils/PlatformValues'
 /*
  Primero se debe crear el stack de navegación para la autenticación del usuario.
@@ -34,22 +38,13 @@ import { getValuesForPlatforms } from './src/utils/PlatformValues'
 */
 
 
-useScreens();
+useScreens()
 
-const PlatformValues = getValuesForPlatforms();
-
-// const SwitchHomeToChecks = createAnimatedSwitchNavigator({
-//   Check: CheckStack
-// })
-
-
-// const getPaddings = () => {
-//   return 
-// }
+const PlatformValues = getValuesForPlatforms()
 
 const fade = (sceneProps: any) => {
 
-  const { scene, position } = sceneProps;
+  const { scene, position } = sceneProps
   const index = scene.index
 
   const translateX = 0
@@ -71,7 +66,6 @@ const CheckStack = createStackNavigator(
   {
     Home: {
       screen: HomeScreen,
-
       navigationOptions: () => ({
         header: null
       })
@@ -96,27 +90,55 @@ const CheckStack = createStackNavigator(
   }
 )
 
+
+const CategoryStack = createStackNavigator({
+  Category: {
+    screen: CategoryScreen,
+    navigationOptions: () => ({
+      header: null,
+      headerBackTitle: null
+    })
+  },
+  CategoryModal: {
+    screen: CategoryAdd,
+    navigationOptions: (): NavigationStackScreenOptions => ({
+      title: 'Añadir nueva categoria',
+      headerTintColor: constants.COLOR_DARK,
+      headerTitleStyle: {
+        color: constants.COLOR_DARK 
+      },
+      // headerStyle: {
+      //   backgroundColor: constants.COLOR_SECONDARY,
+      // },
+    })
+  }
+}, {
+    initialRouteName: 'Category',
+  })
+
+
+
 const AppStack = createBottomTabNavigator({
   Search: SearchScreen,
   Home: CheckStack,
-  Categories: CategoryScreen
+  Categories: CategoryStack
 },
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        // let iconComponent = FontAwesome;
-        let iconName;
+        const { routeName } = navigation.state
+        // let iconComponent = FontAwesome
+        let iconName
         if (routeName === 'Search') {
-          iconName = Platform.OS === "android" ? 'md-search' : 'ios-search';
+          iconName = Platform.OS === "android" ? 'md-search' : 'ios-search'
           // En caso tal de querer tener un icono con una badge.
-          // iconComponent = HomeIconWithBadge;
+          // iconComponent = HomeIconWithBadge
         } else if (routeName === 'Home') {
-          iconName = Platform.OS === "android" ? 'md-home' : 'ios-home';
+          iconName = Platform.OS === "android" ? 'md-home' : 'ios-home'
         } else {
-          iconName = Platform.OS === "android" ? 'md-list' : 'ios-list';
+          iconName = Platform.OS === "android" ? 'md-list' : 'ios-list'
         }
-        return <Ionicons style={{paddingTop: 5}} name={iconName} size={24} color={tintColor} />
+        return <Ionicons style={{ paddingTop: 5 }} name={iconName} size={24} color={tintColor} />
       }
     }),
     initialRouteName: 'Home',
@@ -136,7 +158,7 @@ const AppStack = createBottomTabNavigator({
         // paddingTop: PlatformValues.paddingTopForTab
       }
     }
-  });
+  })
 
 const AuthStack = createStackNavigator({
   Signin: {
@@ -164,7 +186,7 @@ const AuthStack = createStackNavigator({
 
     }),
   }
-});
+})
 
 
 
@@ -172,7 +194,7 @@ const RouteConfig = {
   AuthLoading: AuthLoadingScreen,
   App: AppStack,
   Auth: AuthStack
-};
+}
 
 
 const StackNavigatorConfig = {
@@ -180,7 +202,7 @@ const StackNavigatorConfig = {
 }
 
 const AppNavigator = createSwitchNavigator(RouteConfig, StackNavigatorConfig)
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator)
 
 export default class App extends Component {
 
@@ -194,9 +216,9 @@ export default class App extends Component {
       'GorditaBold': require('./src/assets/fonts/Gordita-Bold.ttf'),
       'GorditaRegular': require('./src/assets/fonts/Gordita-regular.ttf'),
       'GorditaBlack': require('./src/assets/fonts/Gordita-Black.ttf')
-    });
+    })
 
-    this.setState({ fontLoaded: true });
+    this.setState({ fontLoaded: true })
   }
   render() {
     return (
