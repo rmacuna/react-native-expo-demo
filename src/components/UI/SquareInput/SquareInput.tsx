@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, Animated, Alert } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import styles from './SquareInput.styles';
+import { SquareInputProps } from './SquareInput.interface';
 
-const SquareInput = (props) => {
+
+const SquareInput: React.FunctionComponent<SquareInputProps> = (props) => {
 
     let textInput: JSX.Element = null
 

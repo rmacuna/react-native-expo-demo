@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import { View, Text, Modal, SafeAreaView, TouchableWithoutFeedback, Animated } from 'react-native'
 import styles from './CategoryAdd.styles'
-import SquareInput from '../../UI/SquareInput/SquareInput';
+import SquareInput from '../../UI/SquareInput/SquareInput'
+import { AnimationState, InputState } from './CategoryAdd.interface'
 
 const CategoryAdd = (props) => {
 
 
-    const [animation, setAnimation] = useState({
+    const [animation, setAnimation] = useState<AnimationState>({
         inputHasValidText: false,
         renderLabel: false,
         initialOpacity: new Animated.Value(0),
         initialPositionY: new Animated.Value(20)
     })
 
-    const [input, setInput] = useState({
+    const [input, setInput] = useState<InputState>({
         inputValue: {
             value: "",
             isEmpty: true
         }
     })
 
-
      // Inicia la animacion del label que aparece al lado del input para indicarnos que estamos escribiendo
-
      const startLabelAnimation = () => {
         
         Animated.parallel([
@@ -38,8 +37,6 @@ const CategoryAdd = (props) => {
         setAnimation({
             ...animation,
             renderLabel: true,
-            // initialOpacity: new Animated.Value(1),
-            // initialPositionY: new Animated.Value(0)
         })
     }
 
@@ -92,8 +89,6 @@ const CategoryAdd = (props) => {
                         value={input.inputValue.value}
                         placeholder="Nombre"
                     />
-                    <Text>{input.inputValue.isEmpty + ''} + '' </Text>
-
                 </View>
             </SafeAreaView>
         </TouchableWithoutFeedback>

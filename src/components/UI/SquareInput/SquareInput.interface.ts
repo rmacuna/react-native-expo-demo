@@ -1,4 +1,5 @@
-import {ViewStyle, TextStyle} from 'react-native'
+import {ViewStyle, TextStyle, TextInputProps, ViewProps} from 'react-native'
+
 
 /**
  * 
@@ -13,4 +14,13 @@ import {ViewStyle, TextStyle} from 'react-native'
      squareInput: ViewStyle,
      rowContainer: ViewStyle,
      labelIndicator: ViewStyle
+ }
+
+ 
+ export interface SquareInputProps extends TextInputProps {
+    labelPlaceholderTitle?: string,
+    icon?: boolean,
+    initialOpacity?: any,
+    initialPositionY?: any,
+    valid?: boolean
  }

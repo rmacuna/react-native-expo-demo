@@ -1,10 +1,10 @@
 import { Color } from "csstype";
 
 // import {StyleSheet } from 'react-native'
-export const COLOR_PRIMARY = '#FFC857';
-export const COLOR_SECONDARY = '#36284C';
+export const COLOR_PRIMARY: string = '#FFC857';
+export const COLOR_SECONDARY: string = '#36284C';
 export const COLOR_DARK: string = 'rgba(50,48,49,1)';
-export const COLOR_DARK_PLACEHOLDER: String = 'rgba(50,48,49,.6)';
+export const COLOR_DARK_PLACEHOLDER: string = 'rgba(50,48,49,.6)';
 
 export const COLOR_LINK: string = "#4485B4";
 export const COLOR_LIGHT: string = '#F6F6F6';
