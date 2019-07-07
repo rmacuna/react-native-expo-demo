@@ -5,14 +5,19 @@ export interface ModalActionProps {
     headerTitle: string,
     modalClose: any
 }
+
+
+type SelectTimeAction = {
+    initialDate: string,
+    finalDate: string
+}
+
+
 export interface ModalActionState {
     startDateTimePicker: boolean,
     endDateTimePicker: boolean,
     dateControls: {
-        pillAction: {
-            initialDate: string,
-            finalDate: string
-        },
+        pillAction: SelectTimeAction,
         dateAction: {
             startDateTimePickerVisible: boolean,
             startTimePickerVisible: boolean,

@@ -9,6 +9,7 @@ import { AnimatedValue } from 'react-navigation';
  */
 export interface CategoryStyles {
     modalContainer: ViewStyle,
+    subtitle: ViewStyle
 }
 
 
@@ -35,9 +36,32 @@ export interface AnimationState {
  * 
  */
 
+
+ type animatedInput = {
+     initialOpacity: any,
+     initialPositionY: any
+ }
+
+ type inputControl = {
+
+    // Valor para controlar el estado del input y poder hacer two way data binding
+     value: string,
+
+     labelWasTrigger: boolean
+
+     // Usado para verificar cuando el valor del input esta vacio y poder así desplegar el label animado a la derecha.
+     isEmpty: boolean,
+
+
+     animationState?: animatedInput
+    
+ }
+
+
+
 export interface InputState {
-    inputValue: {
-        value: string,
-        isEmpty: boolean
-    }
+    nameInput: inputControl,
+    descriptionInput: inputControl,
+
+    
 }

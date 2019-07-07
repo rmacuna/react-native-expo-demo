@@ -1,93 +1,154 @@
-import React, { useState } from 'react'
-import { View, Text, Modal, SafeAreaView, TouchableWithoutFeedback, Animated } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, Modal, SafeAreaView, TouchableWithoutFeedback, Animated, Keyboard, Alert } from 'react-native'
 import styles from './CategoryAdd.styles'
 import SquareInput from '../../UI/SquareInput/SquareInput'
 import { AnimationState, InputState } from './CategoryAdd.interface'
 
 const CategoryAdd = (props) => {
 
-
-    const [animation, setAnimation] = useState<AnimationState>({
-        inputHasValidText: false,
-        renderLabel: false,
-        initialOpacity: new Animated.Value(0),
-        initialPositionY: new Animated.Value(20)
-    })
+    
+    
 
     const [input, setInput] = useState<InputState>({
-        inputValue: {
+        nameInput: {
             value: "",
-            isEmpty: true
+            isEmpty: true,
+            labelWasTrigger: false,
+            animationState: {
+                initialOpacity: new Animated.Value(0),
+                initialPositionY: new Animated.Value(20),
+            }
+        },
+        descriptionInput: {
+            value: "",
+            isEmpty: true,
+            labelWasTrigger: false,
+            animationState: {
+                initialOpacity: new Animated.Value(0),
+                initialPositionY: new Animated.Value(20)
+
+            }
         }
     })
 
-     // Inicia la animacion del label que aparece al lado del input para indicarnos que estamos escribiendo
-     const startLabelAnimation = () => {
+
+    useEffect(() => {
         
+    }, [input])
+
+
+    // Inicia la animacion del label que aparece al lado del input para indicarnos que estamos escribiendo
+    const startLabelAnimation = (keyInput) => {
+
         Animated.parallel([
-            Animated.spring(animation.initialOpacity, {
+            Animated.spring(input[keyInput].animationState.initialOpacity, {
                 toValue: 1
             }),
-            Animated.spring(animation.initialPositionY, {
+            Animated.spring(input[keyInput].animationState.initialPositionY, {
                 toValue: 0,
             })
 
         ]).start()
-
-        setAnimation({
-            ...animation,
-            renderLabel: true,
+        setInput({
+            ...input,
+            [keyInput]: {
+                ...input[keyInput],
+                labelWasTrigger: true
+            }
         })
+
+        
+
+        // setInput({
+        //     ...input,
+        //     [keyInput]: { 
+        //         ...input[keyInput]
+        //     }
+        // })
+
     }
 
     // Esconde la animacion del label que aparece al lado del input para indicarnos que estamos escribiendo
-    const hideLabelAnimation = () => {
+    const hideLabelAnimation = (keyInput) => {
         Animated.parallel([
-            Animated.spring(animation.initialOpacity, {
+            Animated.spring(input[keyInput].animationState.initialOpacity, {
                 toValue: 0
             }),
-            Animated.spring(animation.initialPositionY, {
+            Animated.spring(input[keyInput].animationState.initialPositionY, {
                 toValue: 20,
             })
 
         ]).start()
-        setAnimation({
-            ...animation,
-            renderLabel: false,
-            // initialOpacity: new Animated.Value(0),
-            // initialPositionY: new Animated.Value(20)
-        })
+
+
+        // setInput({
+        //     ...input,
+        //     [keyInput]: {
+        //         ...input[keyInput],
+        //         labelWasTrigger: false,
+        //     }
+        // })
+
     }
 
-    const handleTextChange = (value) => {
+    const handleTextChange = (value, key) => {
+
+        let inputValue = value
+
         setInput({
-            inputValue: {
+            ...input,
+            [key]: {
+                ...input[key],
                 value: value,
-                isEmpty: value.trim().length === 0
+                isEmpty: value === ''
             }
         })
+        if (!input[key].labelWasTrigger) {
+            console.log('Entro')
+            startLabelAnimation(key)
+        } else if (inputValue.trim().length === 0 ) {
+            console.log('labelWasTrigger')
+            hideLabelAnimation(key)
+        }
+
+
     }
 
-    if (input.inputValue.isEmpty && animation.renderLabel) {
-        hideLabelAnimation()
-    } else if (!input.inputValue.isEmpty && !animation.renderLabel) {
-        startLabelAnimation()
-    }
-    
+
+    // if (input.nameInput.isEmpty && animation.renderLabel) {
+    //     hideLabelAnimatio
+    // } else if (!input.nameInput.isEmpty && !animation.renderLabel) {
+    //     startLabelAnimation()
+    // }
+
     return (
-        <TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.modalContainer}>
                     <SquareInput
                         labelPlaceholderTitle="Nombre"
                         icon={false}
-                        autoFocus={!input.inputValue.isEmpty}
-                        onChangeText={(value) => handleTextChange(value)}
-                        valid={input.inputValue.isEmpty}
-                        initialPositionY={animation.initialPositionY}
-                        initialOpacity={animation.initialOpacity}
-                        value={input.inputValue.value}
+                        autoFocus={!input.nameInput.isEmpty}
+                        onChangeText={(value) => handleTextChange(value, 'nameInput')}
+                        valid={input.nameInput.isEmpty}
+                        initialPositionY={input.nameInput.animationState.initialPositionY}
+                        initialOpacity={input.nameInput.animationState.initialOpacity}
+                        value={input.nameInput.value}
                         placeholder="Nombre"
+                    />
+                    <Text style={styles.subtitle}>Descripción</Text>
+
+                    <SquareInput
+                        labelPlaceholderTitle="Descripcion"
+                        icon={false}
+                        multiline={true}
+                        autoFocus={!input.descriptionInput.isEmpty}
+                        onChangeText={(value) => handleTextChange(value, 'descriptionInput')}
+                        valid={input.descriptionInput.isEmpty}
+                        initialPositionY={input.descriptionInput.animationState.initialPositionY}
+                        initialOpacity={input.descriptionInput.animationState.initialOpacity}
+                        value={input.descriptionInput.value}
+                        placeholder="Descripcion"
                     />
                 </View>
             </SafeAreaView>
