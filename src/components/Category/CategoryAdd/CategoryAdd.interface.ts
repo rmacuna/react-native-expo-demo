@@ -1,4 +1,4 @@
-import { ViewStyle } from 'react-native';
+import { ViewStyle, View } from 'react-native';
 import { AnimatedValue } from 'react-navigation';
 
 /**
@@ -9,7 +9,8 @@ import { AnimatedValue } from 'react-navigation';
  */
 export interface CategoryStyles {
     modalContainer: ViewStyle,
-    subtitle: ViewStyle
+    subtitle: ViewStyle,
+    hint: ViewStyle
 }
 
 
@@ -47,8 +48,6 @@ export interface AnimationState {
     // Valor para controlar el estado del input y poder hacer two way data binding
      value: string,
 
-     labelWasTrigger: boolean
-
      // Usado para verificar cuando el valor del input esta vacio y poder así desplegar el label animado a la derecha.
      isEmpty: boolean,
 
@@ -62,6 +61,10 @@ export interface AnimationState {
 export interface InputState {
     nameInput: inputControl,
     descriptionInput: inputControl,
+    colorOneSelected: boolean,
+    colorTwoSelected: boolean,
+    colorThreeSelected: boolean,
+    colorFourthSelected: boolean
 
     
 }
